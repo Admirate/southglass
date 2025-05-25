@@ -72,19 +72,28 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             </div>
           </div>
           
-          <div className="prose prose-lg prose-invert max-w-none">
-            <p className="text-lg leading-relaxed">{project.description}</p>
-            <h2>Project Overview</h2>
-            <p>This project showcases South Glass's expertise in providing premium glass solutions that meet both aesthetic and functional requirements. Our team worked closely with the client to ensure every detail was executed to perfection.</p>
-            <h2>Our Approach</h2>
-            <p>The approach for this project involved detailed planning and precise execution to meet the unique challenges presented. We implemented innovative techniques and utilized our extensive experience to deliver exceptional results.</p>
-            <h2>Key Features</h2>
-            <ul>
-              <li>Premium quality materials selected for durability and aesthetic appeal</li>
-              <li>Innovative installation methods to ensure longevity</li>
-              <li>Energy-efficient design considerations</li>
-              <li>Custom solutions tailored to the specific project requirements</li>
-            </ul>
+          <div className="prose prose-lg prose-invert max-w-none space-y-6">
+            <p className="text-lg leading-relaxed text-justify">{project.description}</p>
+            
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-blue-500/50 inline-block">Project Overview</h2>
+              <p className="text-base leading-relaxed text-justify mb-6">This project showcases South Glass's expertise in providing premium glass solutions that meet both aesthetic and functional requirements. Our team worked closely with the client to ensure every detail was executed to perfection.</p>
+            </div>
+            
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-blue-500/50 inline-block">Our Approach</h2>
+              <p className="text-base leading-relaxed text-justify mb-6">The approach for this project involved detailed planning and precise execution to meet the unique challenges presented. We implemented innovative techniques and utilized our extensive experience to deliver exceptional results.</p>
+            </div>
+            
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-4 pb-2 border-b-2 border-blue-500/50 inline-block">Key Features</h2>
+              <ul className="space-y-3 ml-6">
+                <li className="text-base leading-relaxed">Premium quality materials selected for durability and aesthetic appeal</li>
+                <li className="text-base leading-relaxed">Innovative installation methods to ensure longevity</li>
+                <li className="text-base leading-relaxed">Energy-efficient design considerations</li>
+                <li className="text-base leading-relaxed">Custom solutions tailored to the specific project requirements</li>
+              </ul>
+            </div>
           </div>
         </div>
         
