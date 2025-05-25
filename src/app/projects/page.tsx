@@ -8,6 +8,7 @@ import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectList from "@/components/projects/ProjectList";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import Image from "next/image";
 
 export default function ProjectsPage() {
   const [category, setCategory] = useState("all");
@@ -23,11 +24,20 @@ export default function ProjectsPage() {
       {/* Header with navigation */}
       <Navbar />
 
-      {/* Hero Section - No Background */}
+      {/* Hero Section with Background Image */}
       <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
+          {/* Background image */}
+          <Image
+            src="/projects/projects-hero.png"
+            alt="Innovative glass projects background"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 via-black/80 to-black" />
-          {/* Removed the background image */}
         </div>
 
         <div className="container mx-auto px-4 z-10">

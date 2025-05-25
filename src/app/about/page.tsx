@@ -101,7 +101,6 @@ export default function AboutPage() {
         <div className="container relative z-20 px-4 md:px-6">
           <StaggeredReveal>
             <div className="max-w-4xl mx-auto text-center">
-              <p className="text-blue-300 tracking-wider uppercase mb-3 opacity-90">Est. 2014</p>
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
                 Welcome to Our Glass 
                 <span className="relative inline-block">
@@ -120,7 +119,7 @@ export default function AboutPage() {
               
               {/* Adding the Ethics text below button */}
               <div className="mt-10">
-                <p className="text-[#3BA6C4] tracking-[0.15em] sm:tracking-[0.25em] text-xl sm:text-2xl font-light">ETHICS . EXPERTISE . EXECUTION</p>
+                
               </div>
             </div>
           </StaggeredReveal>

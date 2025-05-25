@@ -55,6 +55,7 @@ export default function Home() {
         <div className="container relative z-20 px-4 md:px-6">
           <StaggeredReveal>
             <div className="max-w-4xl mx-auto text-center">
+              <p className="text-blue-300 tracking-wider uppercase mb-3 opacity-90">EST. 2014</p>
               <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
                 Transforming 
                 <span className="relative inline-block ml-3">

@@ -53,8 +53,8 @@ export default function Navbar() {
       // We're on the server, return false to ensure server/client initial render matches
       return false;
     }
-    const currentPath = window.location.pathname;
-    return currentPath === path || (path !== '/' && currentPath.startsWith(path));
+      const currentPath = window.location.pathname;
+      return currentPath === path || (path !== '/' && currentPath.startsWith(path));
   };
 
   // Update active items on client-side after component mounts
