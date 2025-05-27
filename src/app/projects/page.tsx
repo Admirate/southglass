@@ -29,7 +29,7 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 z-0">
           {/* Background image */}
           <Image
-            src="/projects/projects-hero.png"
+            src="/projects/projects-hero.jpg"
             alt="Innovative glass projects background"
             fill
             priority

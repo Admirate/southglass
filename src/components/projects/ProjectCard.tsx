@@ -2,13 +2,13 @@
 
 import { Project } from "@/types/projects";
 import { ArrowRight, MapPin, Calendar } from "lucide-react";
-import Link from "next/link";
 
 interface ProjectCardProps {
   project: Project;
+  onViewDetails: (project: Project) => void;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
   // Generate a consistent background color based on the project category
   const getGradientByCategory = (category: string) => {
     switch (category) {
@@ -70,13 +70,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </p>
         
         <div className="pt-2 sm:pt-3">
-          <Link 
-            href={`/projects/${project.id}`}
+          <button 
+            onClick={() => onViewDetails(project)}
             className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 px-4 py-2 rounded-lg text-white text-xs sm:text-sm font-medium transition-all duration-300 shadow-md hover:shadow-blue-500/30 group"
           >
             <span>View details</span>
             <ArrowRight className="h-3.5 w-3.5 transform group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </button>
         </div>
       </div>
     </div>

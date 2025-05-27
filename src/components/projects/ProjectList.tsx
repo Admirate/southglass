@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Project } from "@/types/projects";
 import { filterProjects } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
 
 interface ProjectListProps {
   category: string;
@@ -13,6 +14,8 @@ interface ProjectListProps {
 export default function ProjectList({ category, searchQuery }: ProjectListProps) {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,6 +28,17 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
     
     return () => clearTimeout(timer);
   }, [category, searchQuery]);
+
+  const handleViewDetails = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Small delay before clearing the project to allow exit animation
+    setTimeout(() => setSelectedProject(null), 300);
+  };
 
   if (isLoading) {
     return (
@@ -64,10 +78,23 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-      {filteredProjects.map(project => (
-        <ProjectCard key={project.id} project={project} />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        {filteredProjects.map(project => (
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            onViewDetails={handleViewDetails}
+          />
+        ))}
+      </div>
+
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        allProjects={filteredProjects}
+      />
+    </>
   );
 } 
