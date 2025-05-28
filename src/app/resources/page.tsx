@@ -24,7 +24,7 @@ const brochures = [
     id: 1,
     title: "Brand Brochure",
     description: "An overview of South Glass, our brand identity, values, and vision.",
-    thumbnail: "", // Thumbnail image not available
+    thumbnail: "/brochure-thumbnails/brand-brochure-thumb.jpg",
     file: "/brochures/SG-BRAND Brochure.pdf",
     pages: 15,
     size: "1.1 MB"
@@ -33,7 +33,7 @@ const brochures = [
     id: 2,
     title: "Product Catalogue",
     description: "Detailed specifications and applications of our entire product lineup.",
-    thumbnail: "", // Thumbnail image not available
+    thumbnail: "/brochure-thumbnails/product-catalogue-thumb.jpg",
     file: "/brochures/SG-PRODUCT BROCHURE-FINAL.pdf",
     pages: 32,
     size: "2.8 MB"
@@ -123,10 +123,20 @@ export default function ResourcesPage() {
               >
                 <div className="relative">
                   <div className="aspect-video bg-gray-800/80 w-full overflow-hidden">
-                    {/* Using icon as thumbnail since actual thumbnails aren't available */}
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-900/30 to-black/60">
-                      <FileText className="w-12 h-12 text-blue-400 opacity-80" />
-                    </div>
+                    {brochure.thumbnail ? (
+                      <img
+                        src={brochure.thumbnail}
+                        alt={`${brochure.title} thumbnail`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    ) : (
+                      // Fallback to icon if no thumbnail is available
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-900/30 to-black/60">
+                        <FileText className="w-12 h-12 text-blue-400 opacity-80" />
+                      </div>
+                    )}
+                    {/* Add an overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   </div>
                 </div>
 

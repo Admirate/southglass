@@ -133,23 +133,17 @@ export default function AboutPage() {
         
         <div className="container px-4 md:px-6 relative">
           <div className="flex flex-col items-center max-w-screen-lg mx-auto">
-            <SectionHeading
-              title="Our Story"
-              subtitle="The journey that shaped who we are today"
-              icon={<Award className="w-12 h-12 text-yellow-400" />}
-            />
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                <span className="text-white">THE </span>
+                <span className="text-[#3BA6C4]">SOUTH GLASS </span>
+                <span className="text-white">STORY</span>
+              </h2>
+              <p className="text-gray-300 mt-6 text-lg">The journey that shaped who we are today</p>
+              <div className="h-1 w-24 bg-gradient-to-r from-blue-500/50 to-transparent mx-auto mt-6"></div>
+            </div>
             
             <div className="mt-20 w-full relative flex">
-              {/* Story heading on the right side */}
-              <div className="hidden md:block absolute right-0 top-0 md:w-1/3 text-right">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                  <span className="text-white">THE</span><br />
-                  <span className="text-[#3BA6C4]">SOUTH</span><br />
-                  <span className="text-[#3BA6C4]">GLASS</span><br />
-                  <span className="text-white">STORY</span>
-                </h2>
-              </div>
-            
               <div className="flex-1 relative">
                 {/* Modern timeline line */}
                 <div className="absolute left-[15px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/50 via-yellow-400/50 to-blue-500/50"></div>
@@ -219,15 +213,6 @@ export default function AboutPage() {
                   title="Industry Leadership"
                   description="Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing."
                 />
-              </div>
-              
-              {/* Mobile version of the story heading */}
-              <div className="md:hidden w-full mt-12">
-                <h2 className="text-4xl font-bold text-center">
-                  <span className="text-white">THE </span>
-                  <span className="text-[#3BA6C4]">SOUTH GLASS </span>
-                  <span className="text-white">STORY</span>
-                </h2>
               </div>
             </div>
           </div>
