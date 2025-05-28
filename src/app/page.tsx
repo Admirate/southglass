@@ -67,19 +67,8 @@ export default function Home() {
               </h1>
               <div className="h-px w-24 bg-gradient-to-r from-blue-400 to-transparent mx-auto my-6"></div>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-semibold leading-relaxed">
-                Engineering Clarity. Scaling Possibility.
-              </p>
-              <p className="mt-2 text-base sm:text-lg text-gray-400 max-w-3xl mx-auto font-light mb-3">
                 Built on experience, defined by precision.
               </p>
-              <p className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
-                Since 2014, South Glass has delivered high-performance glass for automotive and architectural applications—designed for the demands of today, and tomorrow.
-              </p>
-              
-              {/* Ethics text */}
-              <div className="mt-10">
-                <p className="text-[#3BA6C4] tracking-[0.15em] sm:tracking-[0.25em] text-xl sm:text-2xl font-light">ETHICS . EXPERTISE . EXECUTION</p>
-              </div>
             </div>
           </StaggeredReveal>
         </div>

@@ -117,9 +117,12 @@ export default function AboutPage() {
                 Where engineered glass meets modern architecture.
               </p>
               
-              {/* Adding the Ethics text below button */}
+              {/* Adding history text and Ethics text */}
               <div className="mt-10">
-                
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-semibold leading-relaxed mb-6">
+                  Since 2014, South Glass has delivered high-performance glass for automotive and architectural applications—designed for the demands of today, and tomorrow.
+                </p>
+                <p className="text-[#3BA6C4] tracking-[0.15em] sm:tracking-[0.25em] text-xl sm:text-2xl font-light">ETHICS . EXPERTISE . EXECUTION</p>
               </div>
             </div>
           </StaggeredReveal>
