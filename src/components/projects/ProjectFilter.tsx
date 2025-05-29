@@ -6,28 +6,49 @@ import { allCategories } from "@/data/projects";
 
 interface ProjectFilterProps {
   onFilterChange: (category: string, searchQuery: string) => void;
+  initialCategory?: string;
+  initialSearch?: string;
 }
 
-export default function ProjectFilter({ onFilterChange }: ProjectFilterProps) {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+export default function ProjectFilter({ 
+  onFilterChange, 
+  initialCategory = "all",
+  initialSearch = ""
+}: ProjectFilterProps) {
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Update state when initial values change (from URL)
+  useEffect(() => {
+    setSelectedCategory(initialCategory);
+    setSearchQuery(initialSearch);
+    setIsInitialized(true);
+  }, [initialCategory, initialSearch]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    onFilterChange(category, searchQuery);
+    if (isInitialized) {
+      onFilterChange(category, searchQuery);
+    }
     setDropdownOpen(false);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    onFilterChange(selectedCategory, e.target.value);
+    const newSearchQuery = e.target.value;
+    setSearchQuery(newSearchQuery);
+    if (isInitialized) {
+      onFilterChange(selectedCategory, newSearchQuery);
+    }
   };
 
   const clearSearch = () => {
     setSearchQuery("");
-    onFilterChange(selectedCategory, "");
+    if (isInitialized) {
+      onFilterChange(selectedCategory, "");
+    }
   };
 
   // Close dropdown when clicking outside

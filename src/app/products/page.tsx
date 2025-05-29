@@ -1,11 +1,15 @@
 'use client';
 
-import { products } from "@/data/products";
-import { useState } from "react";
-import { Search, Filter, X, ChevronDown, ArrowRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Search, Filter, X, ChevronDown, Loader2 } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import ProductSkeleton from "@/components/products/ProductSkeleton";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { Product } from "@/types/products";
+
+const PRODUCTS_PER_PAGE = 9;
 
 export default function ProductsPage() {
   const [filters, setFilters] = useState({
@@ -14,18 +18,99 @@ export default function ProductsPage() {
     search: "",
   });
   const [showFilters, setShowFilters] = useState(false);
+  
+  // State for infinite scroll
+  const [products, setProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Categories and types for filters
+  const [categories, setCategories] = useState<string[]>([]);
+  const [types, setTypes] = useState<string[]>([]);
 
-  const categories = [...new Set(products.map(product => product.categoryName))].filter(Boolean);
-  const types = [...new Set(products.map(product => product.type))];
+  // Fetch products from API
+  const fetchProducts = useCallback(async (pageNum: number, isNewSearch: boolean = false) => {
+    if (isLoading || (!hasMore && !isNewSearch)) return;
+    
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const params = new URLSearchParams({
+        page: pageNum.toString(),
+        limit: PRODUCTS_PER_PAGE.toString(),
+        ...(filters.category && { category: filters.category }),
+        ...(filters.type && { type: filters.type }),
+        ...(filters.search && { search: filters.search }),
+      });
+      
+      const response = await fetch(`/api/products?${params}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        if (isNewSearch) {
+          setProducts(data.data);
+        } else {
+          setProducts(prev => [...prev, ...data.data]);
+        }
+        
+        setHasMore(data.meta.hasMore);
+        
+        // Extract unique categories and types for filters
+        const allProducts = isNewSearch ? data.data : [...products, ...data.data];
+        const uniqueCategories = [...new Set(allProducts.map((p: Product) => p.categoryName).filter(Boolean))] as string[];
+        const uniqueTypes = [...new Set(allProducts.map((p: Product) => p.type))] as string[];
+        setCategories(uniqueCategories);
+        setTypes(uniqueTypes);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Error fetching products:', err);
+    } finally {
+      setIsLoading(false);
+      setIsInitialLoading(false);
+    }
+  }, [filters, hasMore, isLoading, products]);
 
-  const filteredProducts = products.filter(product => {
-    const categoryMatch = !filters.category || product.categoryName === filters.category;
-    const typeMatch = !filters.type || product.type === filters.type;
-    const searchMatch = !filters.search || 
-      product.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-      product.description.toLowerCase().includes(filters.search.toLowerCase());
-    return categoryMatch && typeMatch && searchMatch;
+  // Load more products
+  const loadMore = useCallback(() => {
+    if (!isLoading && hasMore) {
+      setPage(prev => prev + 1);
+    }
+  }, [isLoading, hasMore]);
+
+  // Set up infinite scroll
+  const infiniteScrollRef = useInfiniteScroll(loadMore, {
+    enabled: hasMore && !isLoading,
+    rootMargin: '200px',
   });
+
+  // Initial load
+  useEffect(() => {
+    fetchProducts(1, true);
+  }, []);
+
+  // Load more when page changes
+  useEffect(() => {
+    if (page > 1) {
+      fetchProducts(page);
+    }
+  }, [page]);
+
+  // Reset and reload when filters change
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    fetchProducts(1, true);
+  }, [filters.category, filters.type, filters.search]);
 
   const clearFilters = () => {
     setFilters({
@@ -33,6 +118,10 @@ export default function ProductsPage() {
       type: "",
       search: "",
     });
+  };
+
+  const handleRetry = () => {
+    fetchProducts(page);
   };
 
   return (
@@ -177,7 +266,9 @@ export default function ProductsPage() {
             <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               Our Products
             </h2>
-            <p className="text-gray-400 mt-1">{filteredProducts.length} products found</p>
+            <p className="text-gray-400 mt-1">
+              {isInitialLoading ? 'Loading...' : `${products.length} products loaded`}
+            </p>
           </div>
           
           <div className="hidden md:block text-center w-2/4">
@@ -189,76 +280,149 @@ export default function ProductsPage() {
           <div className="w-full md:w-1/4"></div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filteredProducts.map((product) => (
-            <div 
-              key={product.id}
-              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+        {/* Error State */}
+        {error && !isInitialLoading && (
+          <div className="text-center py-12">
+            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 max-w-md mx-auto">
+              <p className="text-red-400 mb-4">{error}</p>
+              <button
+                onClick={handleRetry}
+                className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Initial Loading State */}
+        {isInitialLoading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[...Array(PRODUCTS_PER_PAGE)].map((_, i) => (
+              <ProductSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
+        {/* Products Grid */}
+        {!isInitialLoading && !error && (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {products.map((product) => (
                 <div 
-                  className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
-                  style={{
-                    backgroundImage: product.image ? `url(${product.image})` : undefined,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                />
-                {product.featured && (
-                  <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
-                    Featured
+                  key={product.id}
+                  className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-white/10 hover:border-white/20"
+                >
+                  <div className="aspect-[4/3] overflow-hidden relative">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+                    <div 
+                      className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
+                      style={{
+                        backgroundImage: product.image ? `url(${product.image})` : undefined,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }}
+                    />
+                    {product.featured && (
+                      <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
+                        Featured
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-              
-              <div className="p-6">
-                <div className="flex justify-between items-start gap-4 mb-3">
-                  <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
-                    {product.name}
-                  </h3>
-                  <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
-                    {product.type}
+                  
+                  <div className="p-6">
+                    <div className="flex justify-between items-start gap-4 mb-3">
+                      <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
+                        {product.name}
+                      </h3>
+                      <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
+                        {product.type}
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                      {product.description}
+                    </p>
+
+                    {/* Features */}
+                    {product.features && (
+                      <div className="mb-4">
+                        <h4 className="font-medium mb-2 text-sm text-gray-300">Key Features</h4>
+                        <ul className="space-y-2">
+                          {product.features.slice(0, 3).map((feature, index) => (
+                            <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                              <span className="line-clamp-1">{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Applications */}
+                    {product.applications && (
+                      <div>
+                        <h4 className="font-medium mb-2 text-sm text-gray-300">Applications</h4>
+                        <ul className="space-y-2">
+                          {product.applications.slice(0, 2).map((application, index) => (
+                            <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                              <span className="line-clamp-1">{application}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
-                
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2">
-                  {product.description}
-                </p>
-
-                {/* Features */}
-                {product.features && (
-                  <div className="mb-4">
-                    <h4 className="font-medium mb-2 text-sm text-gray-300">Key Features</h4>
-                    <ul className="space-y-2">
-                      {product.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                          <span className="line-clamp-1">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Applications */}
-                {product.applications && (
-                  <div>
-                    <h4 className="font-medium mb-2 text-sm text-gray-300">Applications</h4>
-                    <ul className="space-y-2">
-                      {product.applications.slice(0, 2).map((application, index) => (
-                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                          <span className="line-clamp-1">{application}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Loading More Indicator */}
+            {isLoading && !isInitialLoading && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-8">
+                {[...Array(3)].map((_, i) => (
+                  <ProductSkeleton key={`loading-${i}`} />
+                ))}
+              </div>
+            )}
+
+            {/* Infinite Scroll Trigger */}
+            <div ref={infiniteScrollRef} className="h-10" />
+
+            {/* End of Products Message */}
+            {!hasMore && products.length > 0 && (
+              <div className="text-center py-12">
+                <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-md mx-auto">
+                  <p className="text-gray-400">
+                    You've reached the end! That's all {products.length} products.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* No Products Found */}
+            {!isInitialLoading && products.length === 0 && !error && (
+              <div className="text-center py-12">
+                <div className="bg-white/5 border border-white/10 rounded-xl p-8 max-w-md mx-auto">
+                  <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">No products found</h3>
+                  <p className="text-gray-400">
+                    Try adjusting your filters or search query
+                  </p>
+                  {(filters.category || filters.type || filters.search) && (
+                    <button
+                      onClick={clearFilters}
+                      className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                    >
+                      Clear Filters
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
 
       {/* Footer */}
