@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import ContactForm from "@/components/contact/ContactForm";
 import ContactInfo from "@/components/contact/ContactInfo";
+import ProductEmailSelector from "@/components/contact/ProductEmailSelector";
 import { Building2 } from "lucide-react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -20,22 +20,19 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
-            We'd love to hear from you. Please fill out the form below or use our
-            direct contact information to get in touch with our team.
+            Get in touch with our team using the contact information below or select a product category to send a specific inquiry.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-16">
-          <div className="order-2 lg:order-1">
-            <ContactInfo />
-          </div>
-          
-          <div className="order-1 lg:order-2">
-            <ContactForm />
-          </div>
+        <div className="max-w-2xl mx-auto mb-20">
+          <ContactInfo />
         </div>
-        
-        <div className="mt-20">
+
+        <div className="max-w-4xl mx-auto mb-20">
+          <ProductEmailSelector />
+        </div>
+
+        <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-semibold mb-6">Our Location</h3>
           <div className="h-80 w-full rounded-lg overflow-hidden shadow-lg border border-zinc-800">
             <iframe 
@@ -52,7 +49,6 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
