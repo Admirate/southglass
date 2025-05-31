@@ -191,12 +191,6 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            
-            {/* Additional info for mobile */}
-            <div className="mt-6 mb-2 pt-4 border-t border-blue-900/30">
-              <p className="text-sm text-gray-400 mb-1">South Glass</p>
-              <p className="text-xs text-gray-500">Premium glass solutions since 2014</p>
-            </div>
           </div>
         </nav>
       </div>

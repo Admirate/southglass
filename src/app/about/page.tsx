@@ -101,25 +101,9 @@ export default function AboutPage() {
         <div className="container relative z-20 px-4 md:px-6">
           <StaggeredReveal>
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-                Welcome to Our Glass 
-                <span className="relative inline-block">
-                  <span className="relative z-10">Manufacturing</span>
-                  <span className="absolute bottom-2 left-0 w-full h-3 bg-gradient-to-r from-blue-500/40 to-transparent -z-10 transform skew-x-12"></span>
-                </span>
-                Company
-              </h1>
-              <div className="h-px w-24 bg-gradient-to-r from-blue-400 to-transparent mx-auto my-6"></div>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
-                Precision in Every Pane
-              </p>
-              <p className="mt-2 text-base sm:text-lg text-gray-400 max-w-3xl mx-auto font-light">
-                Where engineered glass meets modern architecture.
-              </p>
-              
               {/* Adding history text and Ethics text */}
               <div className="mt-10">
-                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-semibold leading-relaxed mb-6">
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-semibold leading-relaxed mb-40">
                   Since 2014, South Glass has delivered high-performance glass for automotive and architectural applications—designed for the demands of today, and tomorrow.
                 </p>
                 <p className="text-[#3BA6C4] tracking-[0.15em] sm:tracking-[0.25em] text-xl sm:text-2xl font-light">ETHICS . EXPERTISE . EXECUTION</p>
@@ -136,7 +120,7 @@ export default function AboutPage() {
         
         <div className="container px-4 md:px-6 relative">
           <div className="flex flex-col items-center max-w-screen-lg mx-auto">
-            <div className="text-center mb-20">
+            <div className="text-center mb-8">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
                 <span className="text-white">THE </span>
                 <span className="text-[#3BA6C4]">SOUTH GLASS </span>
@@ -146,7 +130,7 @@ export default function AboutPage() {
               <div className="h-1 w-24 bg-gradient-to-r from-blue-500/50 to-transparent mx-auto mt-6"></div>
             </div>
             
-            <div className="mt-20 w-full relative flex">
+            <div className="mt-8 w-full relative flex">
               <div className="flex-1 relative">
                 {/* Modern timeline line */}
                 <div className="absolute left-[15px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/50 via-yellow-400/50 to-blue-500/50"></div>
@@ -155,66 +139,77 @@ export default function AboutPage() {
                   year="2014"
                   title="The Beginning"
                   description="Operations commence in one of India's largest facilities for automotive glass—a 100,000 sq. ft. PEB shed designed for scale and precision."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2015"
                   title="Key Partnerships"
                   description="Becomes OEM supplier for Hyundai. Also begins OEM partnership with SANY."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2016"
                   title="Expansion Phase"
                   description="Expands portfolio to include architectural glass solutions."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2017"
                   title="Technology Acquisition"
                   description="Procures a state-of-the-art tempering machine from South Tech—enabling capabilities in bent glass and low-e glass processing."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2018"
                   title="Manufacturing Expansion"
                   description="Installs a lamination line from Hangdong, a global leader in glass lamination with convection furnace technology."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2019"
                   title="OEM Partnership"
                   description="Becomes OEM supplier for Olectra."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2021"
                   title="Growth & Recognition"
                   description="Joins hands with MG as an OEM glass supplier for its bus division. Marks a milestone with One Golden Mile winning &quot;Facade of the Year&quot;—a landmark project solely supplied by South Glass."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2022"
                   title="Expansion & Innovation"
                   description="Launches a new 50,000 sq. ft. manufacturing plant dedicated to architectural glass. Installs a Cyclone Series tempering furnace from LandGlass—one of India's first and largest—alongside a fully automated pre-processing line with inline seaming and four-edge processing."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2024"
                   title="New Product Line"
                   description="Introduces a new product line—manufacturing bullet-resistant glass. Partners with Ion Mobility as an OEM glass supplier."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="2025"
                   title="Sustainability & Growth"
                   description="Installs a fully automatic autoclave from LNBF, a global leader in lamination systems. Goes green with a 1MW solar power installation across its manufacturing unit. Enters a landmark partnership with Pyroguard UK, bringing certified fire-rated glass to the Indian market."
+                  className="text-justify"
                 />
                 
                 <TimelineItem
                   year="Present"
                   title="Industry Leadership"
                   description="Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing."
+                  className="text-justify"
                 />
               </div>
             </div>
@@ -223,16 +218,9 @@ export default function AboutPage() {
       </section>
 
       {/* Infrastructure - Modern Clean Design */}
-      <section className="py-24 md:py-32 relative">
+      <section className="py-11 md:py-12 relative">
         <div className="container px-4 md:px-6 relative z-10 max-w-screen-lg mx-auto">
           <div className="flex flex-col items-center">
-            <div className="text-center mb-10">
-              <h2 className="text-4xl md:text-5xl font-bold text-right whitespace-nowrap">
-                <span className="text-white">STRATEGICALLY LOCATED.</span>
-                <span className="text-[#3BA6C4]"> BUILT TO DELIVER</span>
-              </h2>
-            </div>
-            
             <div className="inline-flex items-center justify-center p-2 rounded-full bg-gradient-to-r from-blue-600/20 to-blue-600/5 mb-4">
               <Building2 className="w-6 h-6 text-blue-400" />
             </div>

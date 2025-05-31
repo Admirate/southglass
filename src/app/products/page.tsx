@@ -18,7 +18,7 @@ export default function ProductsPage() {
     search: "",
   });
   const [showFilters, setShowFilters] = useState(false);
-  
+
   // State for infinite scroll
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
@@ -307,76 +307,76 @@ export default function ProductsPage() {
         {/* Products Grid */}
         {!isInitialLoading && !error && (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {products.map((product) => (
+            <div 
+              key={product.id}
+              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-white/10 hover:border-white/20"
+            >
+              <div className="aspect-[4/3] overflow-hidden relative">
+                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
                 <div 
-                  key={product.id}
-                  className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-white/10 hover:border-white/20"
-                >
-                  <div className="aspect-[4/3] overflow-hidden relative">
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
-                    <div 
-                      className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
-                      style={{
-                        backgroundImage: product.image ? `url(${product.image})` : undefined,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                      }}
-                    />
-                    {product.featured && (
-                      <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
-                        Featured
-                      </div>
-                    )}
+                  className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
+                  style={{
+                    backgroundImage: product.image ? `url(${product.image})` : undefined,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
+                />
+                {product.featured && (
+                  <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
+                    Featured
                   </div>
-                  
-                  <div className="p-6">
-                    <div className="flex justify-between items-start gap-4 mb-3">
-                      <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
-                        {product.name}
-                      </h3>
-                      <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
-                        {product.type}
-                      </div>
-                    </div>
-                    
-                    <p className="text-sm text-gray-400 mb-4 line-clamp-2">
-                      {product.description}
-                    </p>
-
-                    {/* Features */}
-                    {product.features && (
-                      <div className="mb-4">
-                        <h4 className="font-medium mb-2 text-sm text-gray-300">Key Features</h4>
-                        <ul className="space-y-2">
-                          {product.features.slice(0, 3).map((feature, index) => (
-                            <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                              <span className="line-clamp-1">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {/* Applications */}
-                    {product.applications && (
-                      <div>
-                        <h4 className="font-medium mb-2 text-sm text-gray-300">Applications</h4>
-                        <ul className="space-y-2">
-                          {product.applications.slice(0, 2).map((application, index) => (
-                            <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                              <span className="line-clamp-1">{application}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                )}
+              </div>
+              
+              <div className="p-6">
+                <div className="flex justify-between items-start gap-4 mb-3">
+                  <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
+                    {product.name}
+                  </h3>
+                  <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
+                    {product.type}
                   </div>
                 </div>
-              ))}
+                
+                <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                  {product.description}
+                </p>
+
+                {/* Features */}
+                {product.features && (
+                  <div className="mb-4">
+                    <h4 className="font-medium mb-2 text-sm text-gray-300">Key Features</h4>
+                    <ul className="space-y-2">
+                      {product.features.slice(0, 3).map((feature, index) => (
+                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                          <span className="line-clamp-1">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Applications */}
+                {product.applications && (
+                  <div>
+                    <h4 className="font-medium mb-2 text-sm text-gray-300">Applications</h4>
+                    <ul className="space-y-2">
+                      {product.applications.slice(0, 2).map((application, index) => (
+                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                          <span className="line-clamp-1">{application}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
+          ))}
+        </div>
 
             {/* Loading More Indicator */}
             {isLoading && !isInitialLoading && (

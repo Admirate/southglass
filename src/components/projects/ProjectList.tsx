@@ -25,7 +25,7 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
   const [error, setError] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   // Pagination state
   const currentPage = parseInt(searchParams.get('page') || '1');
   const [totalPages, setTotalPages] = useState(1);
@@ -106,7 +106,7 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
   if (isLoading) {
     return (
       <div className="space-y-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {[...Array(PROJECTS_PER_PAGE)].map((_, i) => (
             <ProjectSkeleton key={i} />
           ))}
@@ -127,7 +127,7 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
           >
             Try Again
           </button>
-        </div>
+          </div>
       </div>
     );
   }
@@ -160,15 +160,15 @@ export default function ProjectList({ category, searchQuery }: ProjectListProps)
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {projects.map(project => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              onViewDetails={handleViewDetails}
-            />
-          ))}
-        </div>
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            onViewDetails={handleViewDetails}
+          />
+      ))}
+    </div>
 
         {/* Pagination */}
         <Pagination

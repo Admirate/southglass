@@ -31,7 +31,7 @@ export default function ProjectFilter({
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     if (isInitialized) {
-      onFilterChange(category, searchQuery);
+    onFilterChange(category, searchQuery);
     }
     setDropdownOpen(false);
   };
@@ -47,7 +47,7 @@ export default function ProjectFilter({
   const clearSearch = () => {
     setSearchQuery("");
     if (isInitialized) {
-      onFilterChange(selectedCategory, "");
+    onFilterChange(selectedCategory, "");
     }
   };
 

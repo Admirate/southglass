@@ -4,9 +4,10 @@ interface TimelineItemProps {
   year: string;
   title: string;
   description: string;
+  className?: string;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description }) => {
+const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, className }) => {
   return (
     <div className="flex group pl-8 py-8 md:py-10 relative">
       {/* Timeline dot with animation */}
@@ -29,7 +30,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description })
         </div>
         
         {/* Description */}
-        <p className="text-gray-300 leading-relaxed max-w-3xl">
+        <p className={`text-gray-300 leading-relaxed max-w-3xl ${className || ''}`}>
           {description}
         </p>
         

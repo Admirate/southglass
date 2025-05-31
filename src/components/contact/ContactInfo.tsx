@@ -66,16 +66,6 @@ export default function ContactInfo() {
           +91 98765 43210
         </a>
       </ContactItem>
-      
-      <div className="mt-10">
-        <Link
-          href="#schedule"
-          className="w-full py-6 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 rounded-md text-white"
-        >
-          <Calendar size={20} />
-          <span className="text-lg">Schedule a Call</span>
-        </Link>
-      </div>
     </div>
   );
 } 
