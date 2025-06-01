@@ -25,13 +25,13 @@ export default function ContactPage() {
         </div>
         
         <div className="max-w-2xl mx-auto mb-20">
-          <ContactInfo />
-        </div>
-
+            <ContactInfo />
+          </div>
+          
         <div className="max-w-4xl mx-auto mb-20">
           <ProductEmailSelector />
         </div>
-
+        
         <div className="max-w-4xl mx-auto">
           <h3 className="text-2xl font-semibold mb-6">Our Location</h3>
           <div className="h-80 w-full rounded-lg overflow-hidden shadow-lg border border-zinc-800">
