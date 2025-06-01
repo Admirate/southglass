@@ -135,82 +135,104 @@ export default function AboutPage() {
                 {/* Modern timeline line */}
                 <div className="absolute left-[15px] top-0 bottom-0 w-[1px] bg-gradient-to-b from-blue-500/50 via-yellow-400/50 to-blue-500/50"></div>
                 
-                <TimelineItem
-                  year="2014"
-                  title="The Beginning"
-                  description="Operations commence in one of India's largest facilities for automotive glass—a 100,000 sq. ft. PEB shed designed for scale and precision."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={100}>
+                  <TimelineItem
+                    year="2014"
+                    title="The Beginning"
+                    description="Operations commence in one of India's largest facilities for automotive glass—a 100,000 sq. ft. PEB shed designed for scale and precision."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2015"
-                  title="Key Partnerships"
-                  description="Becomes OEM supplier for Hyundai. Also begins OEM partnership with SANY."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={200}>
+                  <TimelineItem
+                    year="2015"
+                    title="Key Partnerships"
+                    description="Becomes OEM supplier for Hyundai. Also begins OEM partnership with SANY."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2016"
-                  title="Expansion Phase"
-                  description="Expands portfolio to include architectural glass solutions."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={300}>
+                  <TimelineItem
+                    year="2016"
+                    title="Expansion Phase"
+                    description="Expands portfolio to include architectural glass solutions."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2017"
-                  title="Technology Acquisition"
-                  description="Procures a state-of-the-art tempering machine from South Tech—enabling capabilities in bent glass and low-e glass processing."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={400}>
+                  <TimelineItem
+                    year="2017"
+                    title="Technology Acquisition"
+                    description="Procures a state-of-the-art tempering machine from South Tech—enabling capabilities in bent glass and low-e glass processing."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2018"
-                  title="Manufacturing Expansion"
-                  description="Installs a lamination line from Hangdong, a global leader in glass lamination with convection furnace technology."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={500}>
+                  <TimelineItem
+                    year="2018"
+                    title="Manufacturing Expansion"
+                    description="Installs a lamination line from Hangdong, a global leader in glass lamination with convection furnace technology."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2019"
-                  title="OEM Partnership"
-                  description="Becomes OEM supplier for Olectra."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={600}>
+                  <TimelineItem
+                    year="2019"
+                    title="OEM Partnership"
+                    description="Becomes OEM supplier for Olectra."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2021"
-                  title="Growth & Recognition"
-                  description="Joins hands with MG as an OEM glass supplier for its bus division. Marks a milestone with One Golden Mile winning &quot;Facade of the Year&quot;—a landmark project solely supplied by South Glass."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={700}>
+                  <TimelineItem
+                    year="2021"
+                    title="Growth & Recognition"
+                    description="Joins hands with MG as an OEM glass supplier for its bus division. Marks a milestone with One Golden Mile winning &quot;Facade of the Year&quot;—a landmark project solely supplied by South Glass."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2022"
-                  title="Expansion & Innovation"
-                  description="Launches a new 50,000 sq. ft. manufacturing plant dedicated to architectural glass. Installs a Cyclone Series tempering furnace from LandGlass—one of India's first and largest—alongside a fully automated pre-processing line with inline seaming and four-edge processing."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={800}>
+                  <TimelineItem
+                    year="2022"
+                    title="Expansion & Innovation"
+                    description="Launches a new 50,000 sq. ft. manufacturing plant dedicated to architectural glass. Installs a Cyclone Series tempering furnace from LandGlass—one of India's first and largest—alongside a fully automated pre-processing line with inline seaming and four-edge processing."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2024"
-                  title="New Product Line"
-                  description="Introduces a new product line—manufacturing bullet-resistant glass. Partners with Ion Mobility as an OEM glass supplier."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={900}>
+                  <TimelineItem
+                    year="2024"
+                    title="New Product Line"
+                    description="Introduces a new product line—manufacturing bullet-resistant glass. Partners with Ion Mobility as an OEM glass supplier."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="2025"
-                  title="Sustainability & Growth"
-                  description="Installs a fully automatic autoclave from LNBF, a global leader in lamination systems. Goes green with a 1MW solar power installation across its manufacturing unit. Enters a landmark partnership with Pyroguard UK, bringing certified fire-rated glass to the Indian market."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={1000}>
+                  <TimelineItem
+                    year="2025"
+                    title="Sustainability & Growth"
+                    description="Installs a fully automatic autoclave from LNBF, a global leader in lamination systems. Goes green with a 1MW solar power installation across its manufacturing unit. Enters a landmark partnership with Pyroguard UK, bringing certified fire-rated glass to the Indian market."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
                 
-                <TimelineItem
-                  year="Present"
-                  title="Industry Leadership"
-                  description="Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing."
-                  className="text-justify"
-                />
+                <StaggeredReveal delay={1100}>
+                  <TimelineItem
+                    year="Present"
+                    title="Industry Leadership"
+                    description="Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing."
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
               </div>
             </div>
           </div>
