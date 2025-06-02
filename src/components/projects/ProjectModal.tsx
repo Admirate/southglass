@@ -103,8 +103,7 @@ export default function ProjectModal({ project, isOpen, onClose, allProjects }: 
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
 
-              {/* Content */}
-              <div className="grid md:grid-cols-2 h-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 h-full">
                 {/* Image/Visual Section */}
                 <div className="relative h-64 md:h-full">
                   <img
@@ -124,8 +123,8 @@ export default function ProjectModal({ project, isOpen, onClose, allProjects }: 
                   </div>
                 </div>
 
-                {/* Details Section */}
-                <div className="p-6 md:p-8 overflow-y-auto max-h-[60vh] md:max-h-full">
+                {/* Details Section with Scrollbar */}
+                <div className="p-6 md:p-8 overflow-y-auto max-h-[90vh] md:max-h-[600px] scrollbar-thin scrollbar-thumb-blue-600 scrollbar-track-gray-800">
                   <div className="space-y-6">
                     {/* Location and Year */}
                     <div className="flex items-center gap-4 text-gray-400">
@@ -152,7 +151,7 @@ export default function ProjectModal({ project, isOpen, onClose, allProjects }: 
                     {currentProject.specs && (
                       <div>
                         <h3 className="text-xl font-semibold text-white mb-3">Specifications</h3>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {Object.entries(currentProject.specs).map(([key, value]) => (
                             <div key={key} className="bg-white/5 rounded-lg p-3">
                               <p className="text-sm text-gray-400 capitalize">

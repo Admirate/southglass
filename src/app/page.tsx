@@ -92,7 +92,11 @@ export default function Home() {
             </div>
             <div className="bg-blue-900/30 border border-blue-500/20 rounded-lg p-4 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-blue-800/40 hover:border-blue-400/40 hover:shadow-lg hover:shadow-blue-500/20 group">
               <div className="text-blue-300 mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:text-blue-200">
-                <Award className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10" />
+                <img 
+                  src="/Icons/expert.png"
+                  alt="Expert Icon"
+                  className="h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10"
+                />
               </div>
               <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-white group-hover:text-blue-100">Led by Specialists</h3>
               <p className="text-sm sm:text-base text-blue-100 group-hover:text-blue-50">Expertise forged in over a decade of focused execution.</p>
@@ -179,7 +183,11 @@ export default function Home() {
           <p className="text-sm sm:text-base text-gray-400 text-center mb-6 sm:mb-8 md:mb-12 max-w-2xl mx-auto">Learn more about South Glass and discover what makes us a leader in the industry</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             <div className="glass-card group relative p-4 sm:p-6 md:p-8 rounded-lg transition-all duration-300 overflow-hidden">
-              <History className="h-7 w-7 sm:h-8 sm:w-8 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <img 
+                src="/Icons/history.png"
+                alt="History Icon"
+                className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300"
+              />
               <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-white">Our History</h3>
               <p className="text-sm sm:text-base text-blue-100 mb-4 sm:mb-5">Since 2014, building on the legacy of Prakash Glass & Rubber Works established in 2000.</p>
               <Link href="/about" className="glass-button inline-flex items-center text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base" aria-label="Learn about our company history and legacy">
@@ -189,7 +197,11 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 h-1 bg-accent w-0 group-hover:w-full transition-all duration-500"></div>
             </div>
             <div className="glass-card group relative p-4 sm:p-6 md:p-8 rounded-lg transition-all duration-300 overflow-hidden">
-              <Shield className="h-7 w-7 sm:h-8 sm:w-8 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <img 
+                src="/Icons/product.png"
+                alt="Products Icon"
+                className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300"
+              />
               <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-white">Our Products</h3>
               <p className="text-sm sm:text-base text-blue-100 mb-4 sm:mb-5">Premium glass solutions for automotive and architectural applications.</p>
               <Link href="/products" className="glass-button inline-flex items-center text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base">
@@ -199,7 +211,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 h-1 bg-accent w-0 group-hover:w-full transition-all duration-500"></div>
             </div>
             <div className="glass-card group relative p-4 sm:p-6 md:p-8 rounded-lg transition-all duration-300 overflow-hidden sm:col-span-2 md:col-span-1">
-              <Award className="h-7 w-7 sm:h-8 sm:w-8 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
+              <Building2 className="h-7 w-7 sm:h-8 sm:w-8 text-white mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-white">Our Projects</h3>
               <p className="text-sm sm:text-base text-blue-100 mb-4 sm:mb-5">Showcasing our finest work and notable installations across the country.</p>
               <Link href="/projects" className="glass-button inline-flex items-center text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-lg transition-all duration-300 group-hover:translate-x-1 text-sm sm:text-base">

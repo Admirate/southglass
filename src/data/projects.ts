@@ -1,10 +1,7 @@
 import { Project } from "@/types/projects";
 
 export const allCategories = [
-  "Architecture", 
-  "Automotive", 
-  "Locomotive", 
-  "Navimotive"
+  "Architecture"
 ];
 
 export const projects: Project[] = [
@@ -95,51 +92,6 @@ export const projects: Project[] = [
       floors: "G+41",
       completion: "January 2026",
       client: "Auro Realty"
-    }
-  },
-  {
-    id: "electric-vehicle",
-    title: "E-Vision GT Concept",
-    description: "Concept electric vehicle featuring advanced glass technology for enhanced visibility and integrated solar panels.",
-    categories: ["Automotive"],
-    year: "2023",
-    location: "Germany",
-    image: "/projects/e-vision-gt.jpg",
-    specs: {
-      range: "600 km",
-      power: "350 kW",
-      acceleration: "0-100 km/h in 3.5s",
-      client: "Major Automotive Manufacturer"
-    }
-  },
-  {
-    id: "high-speed-train",
-    title: "Velocity 350 High-Speed Train",
-    description: "Next-generation high-speed train with specialized glass elements designed for aerodynamics, sound insulation, and passenger comfort.",
-    categories: ["Locomotive"],
-    year: "2021",
-    location: "Japan",
-    image: "/projects/velocity-350.jpg",
-    specs: {
-      maxSpeed: "350 km/h",
-      capacity: "850 passengers",
-      units: "15",
-      client: "National Transit Authority"
-    }
-  },
-  {
-    id: "commercial-ship",
-    title: "Horizon Commercial Vessel",
-    description: "Commercial marine vessel with specialized glass installations providing enhanced visibility and durability in extreme ocean conditions.",
-    categories: ["Navimotive"],
-    year: "2020",
-    location: "Norway",
-    image: "/projects/horizon-vessel.jpg",
-    specs: {
-      length: "120 meters",
-      capacity: "25,000 tons",
-      completion: "2020",
-      client: "Nordic Shipping Company"
     }
   }
 ];

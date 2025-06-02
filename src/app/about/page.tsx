@@ -318,44 +318,61 @@ export default function AboutPage() {
 
       {/* Our Machinery */}
       <section className="py-24 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container px-4 md:px-6">
-          <SectionHeading
-            title="Our Machinery"
-            subtitle="Cutting-edge technology for superior results"
-            icon={<Factory className="w-8 h-8 text-blue-400" />}
-          />
-          
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300">
-              <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
-                <ArrowRight className="w-6 h-6 text-blue-400" />
+        <div className="container px-4 md:px-6 max-w-5xl mx-auto">
+          <div className="space-y-8">
+            <div className="text-center space-y-4">
+              <div className="flex flex-col items-center mb-8">
+                <div className="w-16 h-16 rounded-lg bg-[#0D1117] border border-[#3BA6C4]/20 flex items-center justify-center mb-6">
+                  <Factory className="w-8 h-8 text-[#3BA6C4]" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">LandGlass Cyclone Tempering Furnace</h3>
-              <p className="text-gray-400">Advanced tempering technology that ensures uniform heating and superior glass strength.</p>
+              <h2 className="text-[2.5rem] font-light tracking-wide text-[#3BA6C4]">MACHINES THAT DEFINE THE</h2>
+              <h2 className="text-[2.5rem] font-light tracking-wide text-[#3BA6C4]">BENCHMARK</h2>
             </div>
             
-            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300">
-              <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
-                <Factory className="w-6 h-6 text-blue-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">CNC Machines</h3>
-              <p className="text-gray-400">Precision cutting and edging equipment that delivers flawless glass components with tight tolerances.</p>
+            <div className="max-w-3xl mx-auto">
+              <p className="text-gray-300 text-lg leading-relaxed">
+                We don't just follow industry standards — we manufacture with
+                the machines that set them. Our facility houses some of India's
+                first and largest advanced equipment, including the LandGlass
+                Cyclone Series Tempering Furnace, known for delivering
+                unmatched mechanical strength and optical clarity.
+              </p>
             </div>
             
-            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300">
-              <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
-                <Building2 className="w-6 h-6 text-blue-400" />
+            <div className="mt-16">
+              <div className="bg-[#0B1120] rounded-3xl p-12 border border-gray-800/50">
+                <h3 className="text-[1.75rem] font-light tracking-wide text-[#3BA6C4] mb-8">KEY EQUIPMENT</h3>
+                
+                <div className="h-px w-16 bg-[#3BA6C4]/30 mb-8"></div>
+
+                <ul className="space-y-4 text-gray-300/90 text-lg">
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>LandGlass Cyclone Tempering Furnace (One of India's first and largest)</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>HanJiang Automatic Insulated Glass Line</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>LNBF Autoclave</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>2 Intermac CNC Machines with Online Edge Finish</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>Double Edger & Seaming by GoLive</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="text-[#3BA6C4]">›</span>
+                    <span>Hangdong Lamination Line</span>
+                  </li>
+                </ul>
               </div>
-              <h3 className="text-xl font-bold mb-2">Autoclave</h3>
-              <p className="text-gray-400">High-pressure equipment for laminated glass manufacturing, ensuring perfect bonding and durability.</p>
-            </div>
-            
-            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition duration-300">
-              <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
-                <Factory className="w-6 h-6 text-blue-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Lamination Line</h3>
-              <p className="text-gray-400">Automated production line for creating multi-layer glass products with superior clarity and safety features.</p>
             </div>
           </div>
         </div>
@@ -379,7 +396,11 @@ export default function AboutPage() {
               <div className="relative p-8 md:p-10 flex flex-col items-center text-center">
                 <div className="flex items-center justify-center mb-6">
                   <div className="p-2 rounded-lg bg-orange-500/10 backdrop-blur-sm">
-                    <Shield className="w-8 h-8 text-orange-400" />
+                    <img 
+                      src="/Icons/vision.png"
+                      alt="Vision Icon"
+                      className="w-8 h-8"
+                    />
                   </div>
                 </div>
                 
@@ -477,7 +498,7 @@ export default function AboutPage() {
           <SectionHeading
             title="Strategic Partnerships"
             subtitle="Collaborating with industry leaders for excellence"
-            icon={<Shield className="w-8 h-8 text-blue-400" />}
+            icon={<img src="/Icons/hand-shake.png" alt="Partnership Icon" className="w-8 h-8" />}
           />
           
           <div className="mt-16 bg-gray-800/80 rounded-xl overflow-hidden border border-gray-700">
@@ -526,7 +547,7 @@ export default function AboutPage() {
             icon={<Check className="w-12 h-12 text-green-400" />}
           />
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-14">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mt-14">
             <CertificationCard
               title="BIS"
               description="Indian standards"
