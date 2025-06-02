@@ -158,16 +158,12 @@ export default function Home() {
             >
               {clients.map((client, index) => (
                 <SwiperSlide key={index}>
-                  <div className="glass-card group relative p-4 sm:p-6 rounded-xl overflow-hidden transition-all duration-500">
-                    <div className="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="relative z-10 flex items-center justify-center h-full">
-                      <img
-                        src={client.logo}
-                        alt="Client Logo"
-                        className="w-full h-20 sm:h-24 md:h-28 lg:h-32 object-contain rounded-lg shadow-md transition-transform duration-500 group-hover:scale-105 group-hover:shadow-secondary/30 bg-white/10"
-                      />
-                    </div>
-                    <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-secondary/60 to-secondary/20 w-0 group-hover:w-full transition-all duration-500"></div>
+                  <div className="flex items-center justify-center h-full">
+                    <img
+                      src={client.logo}
+                      alt="Client Logo"
+                      className="w-full h-20 sm:h-24 md:h-28 lg:h-32 object-contain transition-transform duration-300 hover:scale-105"
+                    />
                   </div>
                 </SwiperSlide>
               ))}

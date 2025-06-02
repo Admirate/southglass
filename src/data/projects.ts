@@ -11,86 +11,90 @@ export const projects: Project[] = [
   {
     id: "one-golden-mile",
     title: "One Golden Mile",
-    description: "A luxury residential tower with stunning panoramic views, featuring floor-to-ceiling glass facades and sustainable design elements.",
+    description: "A Grade-A commercial tower offering premium office spaces with LEED Gold pre-certification, strategically positioned near Hyderabad's Financial District.",
     categories: ["Architecture"],
-    year: "2023",
-    location: "Dubai, UAE",
+    year: "2026",
+    location: "Kokapet, Hyderabad",
     isFeatured: true,
+    image: "/projects/one-golden-mile.jpg",
     specs: {
-      area: "125,000 sq ft",
-      floors: "48",
-      completion: "2023",
-      client: "Golden Mile Development Corp"
+      area: "5,10,000 sq ft",
+      floors: "G+14 (4 Basements)",
+      completion: "December 2026",
+      client: "Aurean Eskar Ventures LLP"
     }
   },
   {
     id: "phoenix-285",
-    title: "Phoenix 285",
-    description: "A mixed-use development with innovative glass curtain walls that adapt to changing environmental conditions.",
+    title: "Phoenix Business Hub",
+    description: "A landmark commercial development by Phoenix Group, featuring five towers with modern architecture, designed to accommodate IT/ITES companies in a sustainable environment.",
     categories: ["Architecture"],
-    year: "2022",
-    location: "Singapore",
+    year: "2024",
+    location: "Financial District, Hyderabad",
+    image: "/projects/Phoenix Business Hub.jpg",
     specs: {
-      area: "285,000 sq ft",
-      floors: "42",
-      completion: "2022",
+      area: "2 million sq ft",
+      floors: "G+29 (4–5 Basements)",
+      completion: "2024",
       client: "Phoenix Group"
     }
   },
   {
     id: "rajapushpa-provincia",
-    title: "Rajapushpa Provincia",
-    description: "Luxury residential complex featuring modern architectural design with extensive glass elements and energy-efficient systems.",
+    title: "DSR The Twins",
+    description: "India's largest single-floor luxury residences, each spanning 15,999 sq ft, featuring a full glass façade, 13 ft ceilings, and smart automation—redefining ultra-premium living in Hyderabad.",
     categories: ["Architecture"],
-    year: "2021",
-    location: "Hyderabad, India",
+    year: "2026",
+    location: "Puppalaguda, Hyderabad",
+    image: "/projects/DSR The Twins.PNG",
     specs: {
-      area: "180,000 sq ft",
-      units: "120",
-      completion: "2021",
-      client: "Rajapushpa Properties"
+      area: "3 acres",
+      floors: "G+43 (2 Towers)",
+      completion: "August 2026",
+      client: "DSR Builders & Developers"
     }
   },
   {
     id: "gmr-airport",
-    title: "GMR Airport Terminal",
-    description: "Award-winning airport terminal design with extensive glass architecture that maximizes natural light while maintaining thermal efficiency.",
+    title: "Atluri Ascend",
+    description: "A Grade-A commercial tower offering premium bare-shell office spaces, strategically located near HITEC City with excellent connectivity and modern amenities.",
     categories: ["Architecture"],
-    year: "2020",
-    location: "Hyderabad, India",
+    year: "2024",
+    location: "Kondapur, Hyderabad",
+    image: "/projects/Atluri Ascend.jpg",
     specs: {
-      area: "1.2 million sq ft",
-      capacity: "25 million passengers",
-      completion: "2020",
-      client: "GMR Group"
+      area: "0.83 acres",
+      floors: "G+1",
+      completion: "April 2024",
+      client: "Atluri Developers Pvt. Ltd."
     }
   },
   {
     id: "electric-locomotive",
-    title: "ZX500 Electric Locomotive",
-    description: "High-performance electric locomotive with advanced aerodynamic design and specialized glass components for operator visibility and safety.",
-    categories: ["Locomotive"],
-    year: "2022",
-    location: "France",
+    title: "ITC Kohenur",
+    description: "A luxury hotel inspired by the Koh-i-Noor diamond, featuring a crystal-clear glass façade, sustainable design, and panoramic views of Durgam Cheruvu Lake.",
+    categories: ["Architecture"],
+    year: "2018",
+    location: "HITEC City, Hyderabad",
+    image: "/projects/ITC Kohenur.PNG",
     specs: {
-      power: "5000 kW",
-      maxSpeed: "200 km/h",
-      units: "50",
-      client: "National Railways"
+      completion: "2018",
+      client: "ITC Hotels"
     }
   },
   {
     id: "luxury-yacht",
-    title: "Oceanus Marine Explorer",
-    description: "Luxury marine vessel with panoramic glass viewing areas designed for durability in harsh maritime conditions.",
-    categories: ["Navimotive"],
-    year: "2023",
-    location: "Monaco",
+    title: "Kohinoor by Auro Realty",
+    description: "A residential project comprising seven high-rise towers, offering spacious 2, 3, and 4 BHK apartments with luxurious amenities and expansive open spaces.",
+    categories: ["Architecture"],
+    year: "2026",
+    location: "HITEC City, Hyderabad",
+    image: "/projects/Kohinoor by Auro Realty.png",
     specs: {
-      length: "65 meters",
-      capacity: "14 guests",
-      completion: "2023",
-      client: "Private Owner"
+      area: "25 acres",
+      floors: "G+41",
+      completion: "January 2026",
+      client: "Auro Realty"
     }
   },
   {
@@ -100,6 +104,7 @@ export const projects: Project[] = [
     categories: ["Automotive"],
     year: "2023",
     location: "Germany",
+    image: "/projects/e-vision-gt.jpg",
     specs: {
       range: "600 km",
       power: "350 kW",
@@ -114,6 +119,7 @@ export const projects: Project[] = [
     categories: ["Locomotive"],
     year: "2021",
     location: "Japan",
+    image: "/projects/velocity-350.jpg",
     specs: {
       maxSpeed: "350 km/h",
       capacity: "850 passengers",
@@ -128,6 +134,7 @@ export const projects: Project[] = [
     categories: ["Navimotive"],
     year: "2020",
     location: "Norway",
+    image: "/projects/horizon-vessel.jpg",
     specs: {
       length: "120 meters",
       capacity: "25,000 tons",

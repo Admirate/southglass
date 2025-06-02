@@ -246,81 +246,71 @@ export default function AboutPage() {
             <div className="inline-flex items-center justify-center p-2 rounded-full bg-gradient-to-r from-blue-600/20 to-blue-600/5 mb-4">
               <Building2 className="w-6 h-6 text-blue-400" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">Infrastructure</h2>
-            <div className="h-1 w-20 bg-gradient-to-r from-blue-500/50 to-transparent mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-            {/* Modern image card */}
-            <div className="relative rounded-2xl overflow-hidden group h-[400px] mx-auto w-full">
-              <img 
-                src="/hero-background.jpg"
-                alt="South Glass state-of-the-art manufacturing facility"
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-75"
-                width="800"
-                height="600"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-              
-              {/* Content overlay */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 text-center">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-blue-300 transition-all duration-300">Facility</h3>
-                  <p className="text-gray-300 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 max-w-md mx-auto">
-                    150,000 sq. ft. of optimised workflow. Built for volume. Tuned for precision.
-                  </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">WHERE WE'RE AT</h2>
+            <div className="h-1 w-20 bg-gradient-to-r from-blue-500/50 to-transparent mx-auto mb-12"></div>
                 </div>
               </div>
               
-              {/* Modern badge */}
-              <div className="absolute top-6 right-6">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black/30 border border-blue-400/30 backdrop-blur-sm">
-                  <Sparkles className="w-5 h-5 text-blue-400" />
-                </div>
-              </div>
-            </div>
+        {/* Full-width Image Container */}
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="relative rounded-2xl overflow-hidden">
+            <Image 
+              src="/NH 44.png"
+              alt="South Glass facility location at NH-44"
+              className="w-full h-[500px] sm:h-[600px] md:h-[800px] object-cover rounded-2xl"
+              width={1536}
+              height={800}
+              priority
+              quality={100}
+            />
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-2xl"></div>
 
-            {/* Modern info card */}
-            <div className="relative rounded-2xl overflow-hidden group mx-auto w-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-gray-900/80 backdrop-blur-sm border border-white/5"></div>
-              
-              <div className="relative p-8 md:p-10 text-center">
-                <div className="flex flex-col items-center mb-8">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/20 mb-4">
-                    <MapPin className="w-6 h-6 text-blue-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold group-hover:text-blue-300 transition-colors duration-300">Location</h3>
+            {/* Location Buttons */}
+            <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 inset-x-0 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 md:gap-16 px-4">
+              {/* Head Office Button */}
+              <a 
+                href="https://www.google.com/maps/place/SOUTH+GLASS+PVT+LTD/@17.4272383,78.4274096,15z/data=!4m6!3m5!1s0x3bcb913a7bc4bad7:0x665f484e07c26b45!8m2!3d17.4272383!4d78.4274096!16s%2Fg%2F11v0b_x_0l" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex flex-col items-center px-6 sm:px-8 py-4 sm:py-5 bg-black/70 backdrop-blur-md rounded-2xl border border-blue-400/30 hover:bg-black/80 transition-all duration-300 group hover:scale-[1.02] hover:border-blue-400/50 shadow-lg hover:shadow-blue-900/20"
+              >
+                <div className="bg-blue-500/10 p-2 sm:p-3 rounded-xl mb-2 sm:mb-3">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                 </div>
-                
-                <p className="text-gray-300 mb-10 leading-relaxed max-w-md mx-auto">
-                  On NH 44—logistics that work as efficiently as we do.
-                </p>
+                <span className="text-white font-medium text-base sm:text-lg mb-1">Head Office</span>
+                <span className="text-xs sm:text-sm text-gray-300 mt-1 group-hover:text-blue-300 transition-colors text-center">
+                  Door No. 89/A, Road No. 3
+                </span>
+                <span className="text-xs sm:text-sm text-gray-300 group-hover:text-blue-300 transition-colors text-center">
+                  Sri Nagar Colony, Banjara Hills
+                </span>
+                <span className="text-xs sm:text-sm text-gray-300 group-hover:text-blue-300 transition-colors text-center">
+                  Hyderabad - 500073
+                </span>
+              </a>
 
-                <ul className="space-y-5 max-w-md mx-auto">
-                  <li className="group/item relative pl-8 transition-all duration-300 text-left">
-                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center group-hover/item:bg-blue-500/20 transition-all duration-300">
-                      <Check className="w-3 h-3 text-blue-400" />
-                    </div>
-                    <span className="block text-gray-300 group-hover/item:text-white transition-colors duration-300 py-1">Easy access to major transportation networks</span>
-                    <div className="h-px w-0 group-hover/item:w-full bg-gradient-to-r from-blue-500/50 to-transparent transition-all duration-500"></div>
-                  </li>
-                  <li className="group/item relative pl-8 transition-all duration-300 text-left">
-                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center group-hover/item:bg-blue-500/20 transition-all duration-300">
-                      <Check className="w-3 h-3 text-blue-400" />
-                    </div>
-                    <span className="block text-gray-300 group-hover/item:text-white transition-colors duration-300 py-1">Reduced logistics costs and delivery time</span>
-                    <div className="h-px w-0 group-hover/item:w-full bg-gradient-to-r from-blue-500/50 to-transparent transition-all duration-500"></div>
-                  </li>
-                  <li className="group/item relative pl-8 transition-all duration-300 text-left">
-                    <div className="absolute left-0 top-0 w-6 h-6 rounded-full border border-blue-400/30 flex items-center justify-center group-hover/item:bg-blue-500/20 transition-all duration-300">
-                      <Check className="w-3 h-3 text-blue-400" />
-                    </div>
-                    <span className="block text-gray-300 group-hover/item:text-white transition-colors duration-300 py-1">Proximity to key industrial hubs</span>
-                    <div className="h-px w-0 group-hover/item:w-full bg-gradient-to-r from-blue-500/50 to-transparent transition-all duration-500"></div>
-                  </li>
-                </ul>
-              </div>
+              {/* Factory Button */}
+              <a 
+                href="https://www.google.com/maps/place/South+Glass+Pvt+Ltd/@16.9723250,78.1954660,15z/data=!4m6!3m5!1s0x3bcbcc9ee16634cb:0x3929109e24f99f3a!8m2!3d16.972325!4d78.195466!16s%2Fg%2F11v0b_x_0l" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex flex-col items-center px-6 sm:px-8 py-4 sm:py-5 bg-black/70 backdrop-blur-md rounded-2xl border border-blue-400/30 hover:bg-black/80 transition-all duration-300 group hover:scale-[1.02] hover:border-blue-400/50 shadow-lg hover:shadow-blue-900/20"
+              >
+                <div className="bg-blue-500/10 p-2 sm:p-3 rounded-xl mb-2 sm:mb-3">
+                  <Factory className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                </div>
+                <span className="text-white font-medium text-base sm:text-lg mb-1">Factory</span>
+                <span className="text-xs sm:text-sm text-gray-300 mt-1 group-hover:text-blue-300 transition-colors text-center">
+                  Survey No. 467, NH-44
+                </span>
+                <span className="text-xs sm:text-sm text-gray-300 group-hover:text-blue-300 transition-colors text-center">
+                  Burgul
+                </span>
+                <span className="text-xs sm:text-sm text-gray-300 group-hover:text-blue-300 transition-colors text-center">
+                  Telangana - 509202
+                </span>
+              </a>
             </div>
           </div>
         </div>

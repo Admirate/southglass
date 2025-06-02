@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import FeaturedProject from "@/components/projects/FeaturedProject";
 import ProjectFilter from "@/components/projects/ProjectFilter";
 import ProjectList from "@/components/projects/ProjectList";
 import Navbar from "@/components/navbar";
@@ -87,17 +86,9 @@ function ProjectsContent() {
 
       <div className="container mx-auto px-4 py-12">
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <FeaturedProject />
-        </motion.div>
-
-        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-8">Browse Our Projects</h2>
           <ProjectFilter 
