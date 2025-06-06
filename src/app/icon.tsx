@@ -8,33 +8,41 @@ export const size = {
   width: 32,
   height: 32,
 };
-export const contentType = 'image/png';
 
 // Image generation
 export default function Icon() {
   return new ImageResponse(
     (
-      // ImageResponse JSX element
       <div
         style={{
-          fontSize: 24,
-          background: 'linear-gradient(to bottom right, #1a237e, #000000)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'white',
-          fontWeight: 'bold',
+          background: 'transparent',
+          borderRadius: '12px',
+          overflow: 'hidden',
         }}
       >
-        SG
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 24,
+            background: '#000000',
+            color: '#ffffff',
+            fontWeight: 700,
+          }}
+        >
+          SG
+        </div>
       </div>
     ),
-    // ImageResponse options
     {
-      // For convenience, we can re-use the exported icons size metadata
-      // config to also define the viewport size:
       ...size,
     }
   );

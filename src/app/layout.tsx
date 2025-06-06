@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/SG-LOGO-01.png",
+    shortcut: "/SG-LOGO-01.png",
+    apple: "/SG-LOGO-01.png",
   },
   openGraph: {
     type: "website",
@@ -103,6 +103,9 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <link rel="canonical" href="https://southglass.com" />
+        <link rel="icon" href="/SG-LOGO-01.png" />
+        <link rel="apple-touch-icon" href="/SG-LOGO-01.png" />
+        <link rel="shortcut icon" href="/SG-LOGO-01.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />

@@ -1,51 +1,14 @@
 'use client';
 
-import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import ProjectFilter from "@/components/projects/ProjectFilter";
+import { Suspense } from "react";
 import ProjectList from "@/components/projects/ProjectList";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import BackToTop from "@/components/BackToTop";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 function ProjectsContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  
-  const [category, setCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Initialize state from URL parameters
-  useEffect(() => {
-    const urlCategory = searchParams.get('category') || 'all';
-    const urlSearch = searchParams.get('search') || '';
-    
-    setCategory(urlCategory);
-    setSearchQuery(urlSearch);
-  }, [searchParams]);
-
-  const handleFilterChange = (newCategory: string, newSearchQuery: string) => {
-    setCategory(newCategory);
-    setSearchQuery(newSearchQuery);
-    
-    // Update URL with new filters and reset to page 1
-    const params = new URLSearchParams();
-    if (newCategory !== 'all') {
-      params.set('category', newCategory);
-    }
-    if (newSearchQuery) {
-      params.set('search', newSearchQuery);
-    }
-    // Always reset to page 1 when filters change
-    params.set('page', '1');
-    
-    const newUrl = params.toString() ? `?${params.toString()}` : '/projects';
-    router.push(newUrl, { scroll: false });
-  };
-
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header with navigation */}
@@ -91,12 +54,7 @@ function ProjectsContent() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-8">Browse Our Projects</h2>
-          <ProjectFilter 
-            onFilterChange={handleFilterChange}
-            initialCategory={category}
-            initialSearch={searchQuery}
-          />
-          <ProjectList category={category} searchQuery={searchQuery} />
+          <ProjectList category="all" searchQuery="" />
         </motion.div>
       </div>
 
