@@ -148,7 +148,12 @@ export default function AboutPage() {
                   <TimelineItem
                     year="2015"
                     title="Key Partnerships"
-                    description="Becomes OEM supplier for Hyundai. Also begins OEM partnership with SANY."
+                    description={
+                      <>
+                        <div className="mb-2">Becomes OEM supplier for Hyundai.</div>
+                        <div>Also begins OEM partnership with SANY.</div>
+                      </>
+                    }
                     className="text-justify"
                   />
                 </StaggeredReveal>
@@ -193,7 +198,12 @@ export default function AboutPage() {
                   <TimelineItem
                     year="2021"
                     title="Growth & Recognition"
-                    description="Joins hands with MG as an OEM glass supplier for its bus division. Marks a milestone with One Golden Mile winning &quot;Facade of the Year&quot;—a landmark project solely supplied by South Glass."
+                    description={
+                      <>
+                        <div className="mb-2">Joins hands with MG as an OEM glass supplier for its bus division.</div>
+                        <div>Marks a milestone with One Golden Mile winning &quot;Facade of the Year&quot;—a landmark project solely supplied by South Glass.</div>
+                      </>
+                    }
                     className="text-justify"
                   />
                 </StaggeredReveal>
@@ -202,34 +212,64 @@ export default function AboutPage() {
                   <TimelineItem
                     year="2022"
                     title="Expansion & Innovation"
-                    description="Launches a new 50,000 sq. ft. manufacturing plant dedicated to architectural glass. Installs a Cyclone Series tempering furnace from LandGlass—one of India's first and largest—alongside a fully automated pre-processing line with inline seaming and four-edge processing."
+                    description={
+                      <>
+                        <div className="mb-2">Launches a new 50,000 sq. ft. manufacturing plant dedicated to architectural glass.</div>
+                        <div>Installs a Cyclone Series tempering furnace from LandGlass—one of India's first and largest—alongside a fully automated pre-processing line with inline seaming and four-edge processing.</div>
+                      </>
+                    }
                     className="text-justify"
                   />
                 </StaggeredReveal>
                 
                 <StaggeredReveal delay={900}>
                   <TimelineItem
-                    year="2024"
-                    title="New Product Line"
-                    description="Introduces a new product line—manufacturing bullet-resistant glass. Partners with Ion Mobility as an OEM glass supplier."
+                    year="2023"
+                    title="Product Innovation"
+                    description="Starts manufacturing Bullet resistant glasses"
                     className="text-justify"
                   />
                 </StaggeredReveal>
                 
                 <StaggeredReveal delay={1000}>
                   <TimelineItem
-                    year="2025"
-                    title="Sustainability & Growth"
-                    description="Installs a fully automatic autoclave from LNBF, a global leader in lamination systems. Goes green with a 1MW solar power installation across its manufacturing unit. Enters a landmark partnership with Pyroguard UK, bringing certified fire-rated glass to the Indian market."
+                    year="2024"
+                    title="New Product Line"
+                    description={
+                      <>
+                        <div className="mb-2">Introduces a new product line—manufacturing bullet-resistant glass.</div>
+                        <div>Partners with Ion Mobility as an OEM glass supplier.</div>
+                      </>
+                    }
                     className="text-justify"
                   />
                 </StaggeredReveal>
                 
                 <StaggeredReveal delay={1100}>
                   <TimelineItem
+                    year="2025"
+                    title="Sustainability & Growth"
+                    description={
+                      <>
+                        <div className="mb-2">Installs a fully automatic autoclave from LNBF, a global leader in lamination systems.</div>
+                        <div className="mb-2">Goes green with a 1MW solar power installation across its manufacturing unit.</div>
+                        <div>Enters a landmark partnership with Pyroguard UK, bringing certified fire-rated glass to the Indian market.</div>
+                      </>
+                    }
+                    className="text-justify"
+                  />
+                </StaggeredReveal>
+                
+                <StaggeredReveal delay={1200}>
+                  <TimelineItem
                     year="Present"
                     title="Industry Leadership"
-                    description="Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing."
+                    description={
+                      <>
+                        <div className="mb-2">Continuing our journey of innovation and excellence, we remain committed to pushing the boundaries of what's possible in glass manufacturing.</div>
+                        <div>Pioneering with multiple state of art quality and product variety</div>
+                      </>
+                    }
                     className="text-justify"
                   />
                 </StaggeredReveal>
@@ -547,7 +587,7 @@ export default function AboutPage() {
             icon={<Check className="w-12 h-12 text-green-400" />}
           />
           
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mt-14">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mt-14">
             <CertificationCard
               title="BIS"
               description="Indian standards"
@@ -567,11 +607,6 @@ export default function AboutPage() {
               title="NABL"
               description="Lab-tested assurance"
               logo="/certifications/NABL Logo.png"
-            />
-            <CertificationCard
-              title="Pyroguard"
-              description="Fire-rated certification"
-              logo="/certifications/PG Logo.png"
             />
           </div>
         </div>

@@ -54,16 +54,16 @@ export default function ContactInfo() {
         <div className="space-y-2">
           <EmailLink email="glassorder@southglass.in" />
           <EmailLink email="ppc@southglass.in" />
-          <EmailLink email="hr@southglass.in" />
+          <EmailLink email="br@southglass.in" />
         </div>
       </ContactItem>
       
       <ContactItem icon={<Phone size={24} />} title="Call Us">
         <a 
-          href="tel:+919876543210" 
+          href="tel:+919885962000" 
           className="block text-zinc-400 hover:text-blue-400 transition-colors duration-200"
         >
-          +91 98765 43210
+          +91 9885962000
         </a>
       </ContactItem>
     </div>

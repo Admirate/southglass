@@ -3,7 +3,7 @@ import React from 'react';
 interface TimelineItemProps {
   year: string;
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   className?: string;
 }
 
@@ -30,9 +30,9 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, c
         </div>
         
         {/* Description */}
-        <p className={`text-gray-300 leading-relaxed max-w-3xl ${className || ''}`}>
+        <div className={`text-gray-300 leading-relaxed max-w-3xl ${className || ''}`}>
           {description}
-        </p>
+        </div>
         
         {/* Hover animation for the entire item */}
         <div className="absolute inset-0 left-8 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg -z-10"></div>

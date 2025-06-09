@@ -94,7 +94,7 @@ export default function Navbar() {
               <img 
                 src="/SG-LOGO-01.png" 
                 alt="South Glass Logo" 
-                className="h-10 w-28 sm:h-12 sm:w-32 md:h-16 md:w-44 transition-transform duration-300 group-hover:scale-105" 
+                className="h-10 sm:h-12 md:h-16 object-contain transition-transform duration-300 group-hover:scale-105" 
                 width="176" 
                 height="64"
                 loading="eager"
@@ -157,7 +157,7 @@ export default function Navbar() {
                 <img 
                   src="/SG-LOGO-01.png" 
                   alt="South Glass Logo" 
-                  className="h-10 w-28" 
+                  className="h-10 object-contain" 
                   width="112" 
                   height="40"
                   loading="eager"
