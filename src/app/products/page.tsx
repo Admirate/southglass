@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from "react";
-import { Search, Filter, X, ChevronDown, Loader2 } from "lucide-react";
+import { Search, Filter, X, ChevronDown, Loader2, Settings } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -156,6 +156,27 @@ export default function ProductsPage() {
             <p className="text-base sm:text-lg md:text-xl text-gray-300">
               Discover our collection of high-quality glass products for architectural, automotive, and specialty applications.
             </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Technical Specifications Link */}
+      <div className="border-b border-white/10 bg-black/60 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-center sm:text-left">
+              <h3 className="text-lg font-semibold text-white mb-2">Need Technical Data?</h3>
+              <p className="text-gray-400 text-sm">
+                View comprehensive specifications, standards, and certifications for all our glass products.
+              </p>
+            </div>
+            <Link 
+              href="/specifications" 
+              className="glass-button px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-accent/20 transition-all duration-300 border border-accent/50"
+            >
+              <Settings className="h-5 w-5 text-accent" />
+              <span className="text-white font-medium">View Technical Specifications</span>
+            </Link>
           </div>
         </div>
       </div>
