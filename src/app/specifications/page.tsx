@@ -21,6 +21,7 @@ import Footer from '@/components/footer';
 interface GridTableData {
   headers: string[];
   rows: string[][];
+  title?: string;
 }
 
 interface SpecificationCategory {
@@ -67,7 +68,7 @@ const specifications: SpecificationCategory[] = [
     ]
   },
   {
-    title: "Electrical Specifications",
+    title: "Heated Glass Electrical Specification",
     icon: <Zap className="h-4 w-4" />,
     description: "Power and electrical specifications for heated glass systems",
     tables: [
@@ -88,21 +89,24 @@ const specifications: SpecificationCategory[] = [
     description: "Ballistic protection standards and specifications",
     tables: [
       {
-        headers: ["RATING", "CALIBER", "BULLET MASS", "TEST RANGE (m)", "VELOCITY (m/s)", "NO. OF STRIKES (mm)", "THICKNESS"],
+        title: "CERTIFIED TO EN 1063 STANDARDS",
+        headers: ["RATING", "CALIBRE", "BULLET MASS", "TEST RANGE (m)", "VELOCITY (m/s)", "NO. OF STRIKES (mm)","THICKNESS", ""],
         rows: [
-          ["", "", "CERTIFIED TO EN 1063 STANDARDS", "", "", "SPLINTERS", "NON-SPLINTERS"],
+          ["", "", "", "", "", "", "SPLINTERS", "NON-SPLINTERS"],
           ["BR1", ".22 Long Rifle", "2.6+/-0.1", "10+/-0.5", "360+/-10", "3", "20", "22"],
           ["BR2", "9mm Luger", "8+/-0.1", "5+/-0.5", "400+/-10", "3", "21", "24"],
           ["BR3", "0.357 Magnum", "10.2+/-0.1", "5+/-0.5", "430+/-10", "3", "25", "40"],
           ["BR4", "0.44 Magnum", "15.6+/-0.1", "5+/-0.5", "440+/-10", "3", "33", "43"],
           ["BR5", "5.56x45", "4+/-0.1", "10+/-0.5", "950+/-10", "3", "35", "55"],
           ["BR6", "7.62x51 MSC", "9.5+/-0.1", "10+/-0.5", "830+/-10", "3", "40", "40"],
-          ["BR7", "7.62x51 HSC", "9.8+/-0.1", "10+/-0.5", "820+/-10", "3", "68", "75"]
+          ["BR7", "7.62x51 HSC", "9.8+/-0.1", "10+/-0.5", "820+/-10", "3", "65", "75"]
         ]
       },
       {
-        headers: ["", "", "CERTIFIED TO NATO STANAG STANDARDS", "", "", "", ""],
+        title: "CERTIFIED TO NATO STANAG STANDARDS",
+        headers: ["RATING", "CALIBRE", "BULLET MASS", "TEST RANGE (m)", "VELOCITY (m/s)", "NO. OF STRIKES (mm)","THICKNESS", ""],
         rows: [
+          ["", "", "", "", "", "", "SPLINTERS", "NON-SPLINTERS"],
           ["STANAG LVL 2", "7.62x39", "8+/-0.1", "10+/-0.5", "700+/-15", "3", "50", "60"],
           ["STANAG LVL 3", "7.62x54R", "9.6+/-0.1", "10+/-0.5", "830+/-20", "1", "55", "62"]
         ]
@@ -115,6 +119,7 @@ const specifications: SpecificationCategory[] = [
     description: "Impact-resilient glass designed to absorb explosive forces",
     tables: [
       {
+        title: "Standard Specification-EN 13541",
         headers: ["PRODUCT", "REFLECTIVE BLAST OVER PRESSURE (kPa)"],
         rows: [
           ["ER1", "50 - 100"],
@@ -131,15 +136,17 @@ const specifications: SpecificationCategory[] = [
     description: "Fortified glass solutions to deter forced entry",
     tables: [
       {
+        title: "Standard Specification - EN 356",
         headers: ["PRODUCT", "DROP HEIGHT / HITS", "NO. OF STRIKES", "PERFORMANCE CRITERIA"],
         rows: [
           ["P1A", "3000 mm", "3", "Hard body impact"],
-          ["P2A", "6000 mm", "3", "Steel ball dropped using a 4.11 kg steel sphere to (100 mm) steel ball"],
-          ["P4A", "9000 mm", "3", "simulate a hammer attack"],
-          ["P5A", "9000 mm", "9", "-"],
-          ["P6B", "30 - 50 Hits", "-", "Number of axe blows required to create a hole in a 400 mm x 400 mm area"],
-          ["P7B", "51 - 70 Hits", "-", "-"],
-          ["P8B", "71+ Hits", "-", "-"]
+          ["P2A", "6000 mm", "3", "Hard body impact test carried out using a 4.11 kg steel sphere to (100 mm diameter) to simulate a hammer attack"],
+          ["P3A", "7500 mm", "3", ""],
+          ["P4A", "9000 mm", "3", ""],
+          ["P5A", "9000 mm", "9", ""],
+          ["P6B", "-", "30 - 50 Hits", "Number of axe blows required to create a hole in a 400 mm x 400 mm area"],
+          ["P7B", "-", "51 - 70 Hits", ""],
+          ["P8B", "-", "71+ Hits", ""]
         ]
       }
     ]
@@ -163,10 +170,10 @@ const specifications: SpecificationCategory[] = [
     description: "Reliable glass protection against extreme heat and flame",
     tables: [
       {
+        title: "Certified En14449",
         headers: ["SPECIFICATION", "VALUE"],
         rows: [
           ["Fire Rating", "Up to EW 120 (Radiation Control) and EI 20 (Insulation Control)"],
-          ["Standard Compliance", "Certified to EN 14449 (under Pyroguard EN)"],
           ["Maximum Size", "2440 x 5000 mm"],
           ["Minimum Size", "300 x 300 mm"],
           ["Thickness Range", "13-19mm, meeting EW classifications under EN 14449"],
@@ -293,107 +300,357 @@ export default function GlassSpecifications() {
                     <div className="p-2 rounded-lg bg-accent flex-shrink-0">
                       {category.icon}
                     </div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">{category.title}</h2>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
+                      <h2 className="text-xl sm:text-2xl font-bold text-white leading-tight">{category.title}</h2>
+                      {category.title === "Fire Resistant Glass" && (
+                        <div className="bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/40 hover:border-orange-500/60 px-3 py-1.5 rounded-lg transition-all duration-200 hover:scale-105">
+                          <span className="text-sm sm:text-base text-orange-400 font-medium italic">
+                            In Partnership with PYROGUARD
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   {category.description && (
                     <p className="text-gray-400 text-sm sm:text-base">{category.description}</p>
                   )}
                 </div>
 
-                {/* Tables */}
-                {category.tables.map((table, tableIndex) => (
-                  <div key={tableIndex} className="glass-card p-0 rounded-lg overflow-hidden">
-                    {/* Responsive Table Container */}
-                    <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50" style={{ WebkitOverflowScrolling: 'touch' }}>
-                      <table className="w-full" style={{ minWidth: '800px' }}>
-                        {/* Table Header */}
-                        <thead className="sticky top-0 z-10">
-                          <tr className="bg-gradient-to-r from-accent/80 to-gray-800/80 border-b border-gray-600">
-                            {table.headers.map((header, headerIndex) => (
-                              <th 
-                                key={headerIndex} 
-                                className={`
-                                  text-left py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 
-                                  text-white font-semibold text-xs sm:text-sm uppercase tracking-wide 
-                                  border-r border-gray-600/50 last:border-r-0 whitespace-nowrap
-                                  ${headerIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-accent/90 z-20' : 'min-w-[140px] w-[140px]'}
-                                `}
-                              >
-                                <span className="block leading-tight">
-                                  {header.length > 15 ? (
-                                    <span className="block sm:hidden" title={header}>
-                                      {header.substring(0, 12)}...
-                                    </span>
-                                  ) : null}
-                                  <span className={header.length > 15 ? "hidden sm:block" : ""}>
-                                    {header}
-                                  </span>
-                                </span>
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        {/* Table Body */}
-                        <tbody>
-                          {table.rows.map((row, rowIndex) => (
-                            <tr
-                              key={rowIndex}
-                              className={`
-                                border-b border-gray-700/30 transition-colors duration-200
-                                ${rowIndex % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-800/40'}
-                                hover:bg-accent/10
-                                ${row.some(cell => cell.includes('CERTIFIED')) ? 'bg-accent/20 font-medium' : ''}
-                              `}
-                            >
-                              {row.map((cell, cellIndex) => (
-                                <td 
-                                  key={cellIndex} 
-                                  className={`
-                                    py-2 sm:py-3 px-2 sm:px-3 md:px-4 
-                                    border-r border-gray-700/30 last:border-r-0 
-                                    text-xs sm:text-sm
-                                    ${cellIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-inherit z-10 font-medium' : 'min-w-[140px] w-[140px]'}
-                                  `}
-                                >
-                                  {cell.includes('CERTIFIED') ? (
-                                    <span className="bg-accent text-white px-1 sm:px-2 py-1 text-xs font-medium rounded whitespace-nowrap block text-center">
-                                      <span className="sm:hidden">{cell.substring(0, 10)}...</span>
-                                      <span className="hidden sm:inline">{cell}</span>
-                                    </span>
-                                  ) : cell === '-' ? (
-                                    <span className="text-gray-500 text-center block">-</span>
-                                  ) : (
-                                    <span className="text-gray-200 leading-tight break-words">
-                                      {cell.length > 30 ? (
-                                        <>
-                                          <span className="sm:hidden" title={cell}>
-                                            {cell.substring(0, 25)}...
-                                          </span>
-                                          <span className="hidden sm:inline">
+                {/* Special layout for Blast Resistant Glass */}
+                {category.title === "Blast Resistant Glass" ? (
+                  <div className="flex flex-col lg:flex-row lg:items-start gap-9">
+                    {/* Table */}
+                    <div className="flex-shrink-0">
+                      {category.tables.map((table, tableIndex) => (
+                        <div key={tableIndex} className="space-y-2">
+                          {/* Table Title */}
+                          {table.title && (
+                            <div className="bg-accent text-white px-4 py-2 rounded-t-lg text-center font-semibold text-sm sm:text-base max-w-md">
+                              {table.title}
+                            </div>
+                          )}
+                          
+                          <div className="glass-card p-0 rounded-lg overflow-hidden rounded-t-none max-w-md">
+                            {/* Responsive Table Container */}
+                            <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50" style={{ WebkitOverflowScrolling: 'touch' }}>
+                              <table className="w-full" style={{ minWidth: 'auto' }}>
+                                {/* Table Header */}
+                                <thead className="sticky top-0 z-10">
+                                  <tr className="bg-gradient-to-r from-accent/80 to-gray-800/80 border-b border-gray-600">
+                                    {table.headers.map((header, headerIndex) => (
+                                      <th 
+                                        key={headerIndex} 
+                                        className="text-left py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 text-white font-semibold text-xs sm:text-sm uppercase tracking-wide border-r border-gray-600/50 last:border-r-0 whitespace-nowrap"
+                                      >
+                                        <span className="block leading-tight">
+                                          {header}
+                                        </span>
+                                      </th>
+                                    ))}
+                                  </tr>
+                                </thead>
+                                {/* Table Body */}
+                                <tbody>
+                                  {table.rows.map((row, rowIndex) => (
+                                    <tr
+                                      key={rowIndex}
+                                      className={`border-b border-gray-700/30 transition-colors duration-200 ${rowIndex % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-800/40'} hover:bg-accent/10`}
+                                    >
+                                      {row.map((cell, cellIndex) => (
+                                        <td 
+                                          key={cellIndex} 
+                                          className="py-2 sm:py-3 px-2 sm:px-3 md:px-4 border-r border-gray-700/30 last:border-r-0 text-xs sm:text-sm"
+                                        >
+                                          <span className="text-gray-200 leading-tight break-words">
                                             {cell}
                                           </span>
-                                        </>
-                                      ) : (
-                                        cell
-                                      )}
-                                    </span>
-                                  )}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                                        </td>
+                                      ))}
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     
-                    {/* Mobile Scroll Hint */}
-                    <div className="block sm:hidden border-t border-gray-700/30 table-scroll-hint px-4 py-2">
-                      <p className="text-xs text-gray-400 text-center font-medium">
-                        ← Scroll horizontally to view all columns →
-                      </p>
+                    {/* Note Card */}
+                    <div className="glass-card p-10 sm:p-10 rounded-lg max-w-sm flex-shrink-0">
+                      <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                        <div className="p-1 rounded bg-accent">
+                          <Shield className="h-4 w-4" />
+                        </div>
+                        BLAST RESISTANT GLASS - EN 13541
+                      </h3>
+                      <div className="text-gray-300 space-y-4 text-xs sm:text-sm">
+                        <p className="text-white font-medium">Built to endure extreme blast forces without compromise.</p>
+                        
+                        <div className="bg-accent/10 p-3 rounded-lg border-l-4 border-accent">
+                          <p className="text-accent font-semibold">Used in Military vehicles, Data centers, and VIP installations.</p>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <p><strong className="text-white">Available in thicknesses from 6.76 mm to 36 mm</strong></p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 gap-3">
+                          <div>
+                            <p className="font-semibold text-white text-sm">Maximum size</p>
+                            <p>2000×4000 mm</p>
+                            <p className="text-xs text-gray-400 italic">*Maximum size is subject to thickness</p>
+                          </div>
+                          <div>
+                            <p className="font-semibold text-white text-sm">Minimum size</p>
+                            <p>100×100 mm</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ))}
+                ) : (
+                  /* Normal table layout for other categories */
+                  category.tables.map((table, tableIndex) => (
+                    <div key={tableIndex} className="space-y-2">
+                      {/* Table Title */}
+                      {table.title && (
+                        <div className="bg-accent text-white px-4 py-2 rounded-t-lg text-center font-semibold text-sm sm:text-base">
+                          {table.title}
+                        </div>
+                      )}
+                      
+                      <div className={`glass-card p-0 rounded-lg overflow-hidden ${table.title ? 'rounded-t-none' : ''}`}>
+                        {/* Responsive Table Container */}
+                        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50" style={{ WebkitOverflowScrolling: 'touch' }}>
+                          <table className="w-full" style={{ minWidth: '800px' }}>
+                            {/* Table Header */}
+                            <thead className="sticky top-0 z-10">
+                              <tr className="bg-gradient-to-r from-accent/80 to-gray-800/80 border-b border-gray-600">
+                                {table.headers.map((header, headerIndex) => (
+                                  <th 
+                                    key={headerIndex} 
+                                    className={`text-left py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 text-white font-semibold text-xs sm:text-sm uppercase tracking-wide border-r border-gray-600/50 last:border-r-0 whitespace-nowrap ${headerIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-accent/90 z-20' : 'min-w-[140px] w-[140px]'}`}
+                                  >
+                                    <span className="block leading-tight">
+                                      {header.length > 15 ? (
+                                        <span className="block sm:hidden" title={header}>
+                                          {header.substring(0, 12)}...
+                                        </span>
+                                      ) : null}
+                                      <span className={header.length > 15 ? "hidden sm:block" : ""}>
+                                        {header}
+                                      </span>
+                                    </span>
+                                  </th>
+                                ))}
+                              </tr>
+                            </thead>
+                            {/* Table Body */}
+                            <tbody>
+                              {table.rows.map((row, rowIndex) => (
+                                <tr
+                                  key={rowIndex}
+                                  className={`border-b border-gray-700/30 transition-colors duration-200 ${rowIndex % 2 === 0 ? 'bg-gray-800/20' : 'bg-gray-800/40'} hover:bg-accent/10 ${row.some(cell => cell.includes('CERTIFIED')) ? 'bg-accent/20 font-medium' : ''}`}
+                                >
+                                  {row.map((cell, cellIndex) => {
+                                    // Special handling for Performance Criteria column in Burglar Resistant Glass
+                                    const isBurglarResistantPerformanceColumn = category.title === "Burglar Resistant Glass" && 
+                                      table.headers[cellIndex] === "PERFORMANCE CRITERIA" && 
+                                      cell !== "" && 
+                                      !cell.includes('CERTIFIED');
+                                    
+                                    return (
+                                      <td 
+                                        key={cellIndex} 
+                                        className={`py-2 sm:py-3 px-2 sm:px-3 md:px-4 text-xs sm:text-sm ${
+                                          isBurglarResistantPerformanceColumn 
+                                            ? 'border-0' // Remove all borders for performance criteria
+                                            : 'border-r border-gray-700/30 last:border-r-0'
+                                        } ${cellIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-inherit z-10 font-medium' : 'min-w-[140px] w-[140px]'}`}
+                                      >
+                                        {cell.includes('CERTIFIED') ? (
+                                          <span className="bg-accent text-white px-1 sm:px-2 py-1 text-xs font-medium rounded whitespace-nowrap block text-center">
+                                            <span className="sm:hidden">{cell.substring(0, 10)}...</span>
+                                            <span className="hidden sm:inline">{cell}</span>
+                                          </span>
+                                        ) : cell === '-' ? (
+                                          <span className="text-gray-500 text-center block">-</span>
+                                        ) : isBurglarResistantPerformanceColumn ? (
+                                          <div className="bg-gray-800/60 p-2 sm:p-3 rounded text-gray-200 leading-tight">
+                                            {cell}
+                                          </div>
+                                        ) : (
+                                          <span className="text-gray-200 leading-tight break-words">
+                                            {cell.length > 30 ? (
+                                              <>
+                                                <span className="sm:hidden" title={cell}>
+                                                  {cell.substring(0, 25)}...
+                                                </span>
+                                                <span className="hidden sm:inline">
+                                                  {cell}
+                                                </span>
+                                              </>
+                                            ) : (
+                                              cell
+                                            )}
+                                          </span>
+                                        )}
+                                      </td>
+                                    );
+                                  })}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        
+                        {/* Mobile Scroll Hint */}
+                        <div className="block sm:hidden border-t border-gray-700/30 table-scroll-hint px-4 py-2">
+                          <p className="text-xs text-gray-400 text-center font-medium">
+                            ← Scroll horizontally to view all columns →
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+
+                {/* Special notes for Automotive Glass Types */}
+                {category.title === "Automotive Glass Types" && (
+                  <div className="mt-6 space-y-4">
+                    {/* Glass Types Information */}
+                    <div className="glass-card p-4 sm:p-6 rounded-lg max-w-2xl">
+                      <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <div className="p-1 rounded bg-accent">
+                          <Layers className="h-4 w-4" />
+                        </div>
+                        Glass Types & Applications
+                      </h3>
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm sm:text-base">
+                        {/* Laminated Safety Glasses */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-blue-400 mb-3">Laminated safety glasses</h4>
+                          <div className="text-gray-300 space-y-2 ml-4">
+                            <p>• Windshields</p>
+                            <p>• Sunroofs/Glass roofs</p>
+                            <p>• Windows</p>
+                            <p>• De-fogging/De-icing/Heated</p>
+                            <div className="mt-3 bg-accent/10 p-3 rounded-lg border-l-4 border-accent">
+                              <p className="font-semibold text-white">Available in both Bend/Curve glasses</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Tempered Safety Glasses */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-blue-400 mb-3">Tempered safety glasses</h4>
+                          <div className="text-gray-300 space-y-2 ml-4">
+                            <p>• Side and Rear windows</p>
+                            <p>• (curved or flat panels available)</p>
+                            <p>• Emergency Exit Windows</p>
+                            <div className="mt-3 bg-blue-600/20 p-3 rounded-lg border-l-4 border-blue-500">
+                              <p className="font-semibold text-blue-200">Built for safety and visibility</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special notes for Heated Glass Electrical Specification */}
+                {category.title === "Heated Glass Electrical Specification" && (
+                  <div className="mt-6">
+                    <div className="glass-card p-4 sm:p-6 rounded-lg">
+                      <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                        <div className="p-1 rounded bg-accent">
+                          <Zap className="h-4 w-4" />
+                        </div>
+                        Application Note
+                      </h3>
+                      <div className="text-gray-300 text-sm sm:text-base">
+                        <p>Applicable for Locomotive, Automotive, Navimotive, Bullet resistant glasses and architectural glasses</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special notes for Bullet Resistant Glass */}
+                {category.title === "Bullet Resistant Glass" && (
+                  <div className="mt-6">
+                    <div className="glass-card p-4 sm:p-6 rounded-lg">
+                      <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                        <div className="p-1 rounded bg-accent">
+                          <Target className="h-4 w-4" />
+                        </div>
+                        Performance & Specifications
+                      </h3>
+                      <div className="text-gray-300 space-y-4 text-sm sm:text-base">
+                        <div>
+                          <p className="font-semibold text-white mb-2">Tested against:</p>
+                          <ul className="space-y-1 ml-4">
+                            <li>• Handguns (.22, 9mm, .357, .44)</li>
+                            <li>• Rifles (5.56x45, 7.62x51, 7.62x54R)</li>
+                            <li>• STANAG Levels 2 & 3</li>
+                          </ul>
+                        </div>
+                        
+                        <div className="bg-accent/10 p-3 rounded-lg border-l-4 border-accent">
+                          <p>Offers multi-hit resistance, anti-spall performance, and optical clarity. Also available with de-icing, defogging, and heated configurations for all-weather.</p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-semibold text-white">Maximum size</p>
+                            <p>2000×4000 mm</p>
+                            <p className="text-xs text-gray-400 italic">*Maximum size is subject to thickness</p>
+                          </div>
+                          <div>
+                            <p className="font-semibold text-white">Minimum size</p>
+                            <p>100×100 mm</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Special notes for Burglar Resistant Glass */}
+                {category.title === "Burglar Resistant Glass" && (
+                  <div className="mt-6 space-y-4">
+                    {/* Specifications Card */}
+                    <div className="glass-card p-4 sm:p-6 rounded-lg">
+                      <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                        <div className="p-1 rounded bg-accent">
+                          <Shield className="h-4 w-4" />
+                        </div>
+                        Specifications & Applications
+                      </h3>
+                      <div className="text-gray-300 space-y-4 text-sm sm:text-base">
+                        <div className="bg-accent/10 p-3 rounded-lg border-l-4 border-accent">
+                          <p>Available in thicknesses from 6.76 mm to 30 mm, tailored to protection levels EN 356 P1A-P8B</p>
+                        </div>
+                        
+                        <div className="bg-blue-600/20 p-3 rounded-lg border-l-4 border-blue-500">
+                          <p className="text-blue-200 font-semibold">Designed for Showrooms, Museums, Banks, and Galleries.</p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div>
+                            <p className="font-semibold text-white">Maximum size</p>
+                            <p>2000×4000 mm</p>
+                            <p className="text-xs text-gray-400 italic">*Maximum size is subject to thickness</p>
+                          </div>
+                          <div>
+                            <p className="font-semibold text-white">Minimum size</p>
+                            <p>100×100 mm</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Special notes for Locomotive/Navimotive */}
                 {category.title === "Locomotive/Navimotive" && (
