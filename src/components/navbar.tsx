@@ -42,7 +42,7 @@ export default function Navbar() {
     { href: "/", label: 'Home' },
     { href: "/about", label: 'About Us' },
     { href: "/products", label: 'Our Products' },
-    { href: "/projects", label: 'Our Projects' },
+    { href: "/projects", label: 'Our Supplies' },
     { href: "/contact", label: 'Contact Us' },
     { href: "/resources", label: 'Resources' },
   ];

@@ -533,45 +533,112 @@ export default function AboutPage() {
       </section>
 
       {/* Strategic Partnerships */}
-      <section className="py-24 bg-gradient-to-b from-black to-gray-900">
-        <div className="container px-4 md:px-6">
-          <SectionHeading
-            title="Strategic Partnerships"
-            subtitle="Collaborating with industry leaders for excellence"
-            icon={<img src="/Icons/hand-shake.png" alt="Partnership Icon" className="w-8 h-8" />}
-          />
-          
-          <div className="mt-16 bg-gray-800/80 rounded-xl overflow-hidden border border-gray-700">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-8 md:p-12">
-                <h3 className="text-2xl md:text-3xl font-bold mb-4">Pyroguard UK</h3>
-                <p className="text-gray-300 mb-6">
-                  A collaboration rooted in performance—combining tested fire resistance with scalable production.
-                </p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-start">
-                    <ChevronRight className="w-5 h-5 text-blue-400 mt-1 mr-2 flex-shrink-0" />
-                    <span className="text-gray-300">Up to 120 minutes fire protection</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ChevronRight className="w-5 h-5 text-blue-400 mt-1 mr-2 flex-shrink-0" />
-                    <span className="text-gray-300">Multi-layer integrity</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ChevronRight className="w-5 h-5 text-blue-400 mt-1 mr-2 flex-shrink-0" />
-                    <span className="text-gray-300">Globally certified systems</span>
-                  </li>
-                </ul>
+      <section className="py-32 bg-gradient-to-b from-black via-gray-950 to-gray-900 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(251,146,60,0.06),transparent_50%)]"></div>
+        
+        <div className="container px-4 md:px-6 relative z-10">
+          <div className="text-center mb-20">
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500/20 via-orange-500/15 to-cyan-500/20 border border-orange-500/20 flex items-center justify-center mb-6 backdrop-blur-sm">
+                <img src="/Icons/hand-shake.png" alt="Partnership Icon" className="w-10 h-10 filter brightness-110" />
               </div>
-              <div className="relative h-64 md:h-auto">
-                <img 
-                  src="/partnerships/pyroguard.jpg" 
-                  alt="South Glass partnership with Pyroguard UK for fire-rated glass solutions" 
-                  className="absolute inset-0 w-full h-full object-cover"
-                  width="600"
-                  height="400"
-                  loading="lazy"
-                />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white mb-6">
+              Strategic Partnerships
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 via-orange-400 to-cyan-400 mx-auto mb-6"></div>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Collaborating with industry leaders for excellence
+            </p>
+          </div>
+          
+          {/* Enhanced Partnership Card */}
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-700/50 shadow-2xl relative">
+              {/* Decorative Elements */}
+              <div className="absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-1 -left-1 w-32 h-32 bg-gradient-to-tr from-cyan-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
+                {/* Content Section */}
+                <div className="p-12 lg:p-16 flex flex-col justify-center relative z-10">
+                  <div className="mb-8">
+                    <div className="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500/10 to-blue-500/10 border border-orange-500/20 mb-6">
+                      <Sparkles className="w-4 h-4 text-orange-400 mr-2" />
+                      <span className="text-orange-400 font-medium text-sm">Premium Partnership</span>
+                    </div>
+                    <h3 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-orange-200 to-gray-300 bg-clip-text text-transparent">
+                      Pyroguard UK
+                    </h3>
+                    <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                      A collaboration rooted in performance—combining tested fire resistance with scalable production for the most demanding applications.
+                    </p>
+                  </div>
+                  
+                  {/* Enhanced Features List */}
+                  <div className="space-y-4 mb-10">
+                    <div className="flex items-start group">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-blue-500 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-white font-medium">Up to 120 minutes fire protection</span>
+                        <p className="text-gray-400 text-sm mt-1">Certified performance under extreme conditions</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start group">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-orange-500 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-white font-medium">Multi-layer integrity</span>
+                        <p className="text-gray-400 text-sm mt-1">Advanced lamination technology</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start group">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-cyan-500 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                      <div>
+                        <span className="text-white font-medium">Globally certified systems</span>
+                        <p className="text-gray-400 text-sm mt-1">Meeting international standards</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                </div>
+                
+                {/* Enhanced Image Section */}
+                <div className="relative lg:min-h-[500px]">
+                  <img 
+                    src="/partnerships/pyroguard.jpg" 
+                    alt="South Glass partnership with Pyroguard UK for fire-rated glass solutions" 
+                    className="absolute inset-0 w-full h-full object-cover"
+                    width="600"
+                    height="400"
+                    loading="lazy"
+                  />
+
+                  
+                  {/* Decorative Corner Elements */}
+                  <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-orange-400/50 rounded-tr-2xl"></div>
+                  <div className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-cyan-400/50 rounded-bl-2xl"></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bottom Statistics/Highlights */}
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              <div className="text-center p-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-orange-500/20 hover:border-orange-400/40 transition-colors duration-300">
+                <div className="text-3xl font-bold text-orange-400 mb-2">120+</div>
+                <div className="text-gray-300 font-medium">Minutes Protection</div>
+              </div>
+              <div className="text-center p-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-blue-500/20 hover:border-blue-400/40 transition-colors duration-300">
+                <div className="text-3xl font-bold text-blue-400 mb-2">EN14449</div>
+                <div className="text-gray-300 font-medium">Certified Standards</div>
               </div>
             </div>
           </div>
