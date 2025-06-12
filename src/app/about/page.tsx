@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight, Award, Building2, ChevronRight, Factory, Shield, MapPin, Check, Sparkles } from "lucide-react";
 import SectionHeading from "@/components/section-heading";
@@ -63,6 +63,18 @@ const aboutPageSchema = {
 };
 
 export default function AboutPage() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      setMousePosition({ x, y });
+    }
+  };
+
   return (
     <div className="bg-black text-white min-h-screen font-sans antialiased">
       <JsonLd data={aboutPageSchema} />
@@ -556,20 +568,47 @@ export default function AboutPage() {
           
           {/* Enhanced Partnership Card */}
           <div className="max-w-7xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-700/50 shadow-2xl relative">
+            <div 
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm rounded-3xl overflow-hidden border border-gray-700/50 shadow-2xl relative group cursor-pointer transition-all duration-300 hover:scale-[1.02]"
+              style={{
+                '--mouse-x': `${mousePosition.x}%`,
+                '--mouse-y': `${mousePosition.y}%`,
+              } as React.CSSProperties}
+            >
+              {/* Cursor-following glow effect */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(251, 146, 60, 0.15), transparent 40%)`,
+                }}
+              />
+              {/* Enhanced border glow */}
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background: `radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), transparent, transparent 40%, rgba(251, 146, 60, 0.4) 50%, transparent 70%)`,
+                  mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  maskComposite: 'xor',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  padding: '2px',
+                }}
+              />
               {/* Decorative Elements */}
-              <div className="absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-1 -left-1 w-32 h-32 bg-gradient-to-tr from-cyan-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+              <div className="absolute -top-1 -right-1 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-cyan-500/20 rounded-full blur-3xl group-hover:from-orange-500/30 group-hover:to-cyan-500/30 group-hover:scale-110 transition-all duration-500"></div>
+              <div className="absolute -bottom-1 -left-1 w-32 h-32 bg-gradient-to-tr from-cyan-500/20 to-orange-500/20 rounded-full blur-3xl group-hover:from-cyan-500/30 group-hover:to-orange-500/30 group-hover:scale-110 transition-all duration-500"></div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px]">
                 {/* Content Section */}
                 <div className="p-12 lg:p-16 flex flex-col justify-center relative z-10">
                   <div className="mb-8">
-                    <div className="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500/10 to-blue-500/10 border border-orange-500/20 mb-6">
-                      <Sparkles className="w-4 h-4 text-orange-400 mr-2" />
-                      <span className="text-orange-400 font-medium text-sm">Premium Partnership</span>
+                    <div className="inline-flex items-center px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500/10 to-blue-500/10 border border-orange-500/20 mb-6 group-hover:from-orange-500/20 group-hover:to-blue-500/20 group-hover:border-orange-500/40 transition-all duration-300">
+                      <Sparkles className="w-4 h-4 text-orange-400 mr-2 group-hover:text-orange-300 transition-colors duration-300" />
+                      <span className="text-orange-400 font-medium text-sm group-hover:text-orange-300 transition-colors duration-300">Premium Partnership</span>
                     </div>
-                    <h3 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-orange-200 to-gray-300 bg-clip-text text-transparent">
+                    <h3 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-orange-200 to-gray-300 bg-clip-text text-transparent group-hover:from-orange-100 group-hover:via-orange-100 group-hover:to-white transition-all duration-300">
                       Pyroguard UK
                     </h3>
                     <p className="text-gray-300 text-lg leading-relaxed mb-8">
@@ -612,11 +651,11 @@ export default function AboutPage() {
                 </div>
                 
                 {/* Enhanced Image Section */}
-                <div className="relative lg:min-h-[500px]">
+                <div className="relative lg:min-h-[500px] bg-black flex items-center justify-center group-hover:bg-gray-950 transition-colors duration-500">
                   <img 
                     src="/partnerships/pyroguard.jpg" 
                     alt="South Glass partnership with Pyroguard UK for fire-rated glass solutions" 
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="max-w-full max-h-full object-contain p-12 lg:p-16 group-hover:scale-105 transition-transform duration-500"
                     width="600"
                     height="400"
                     loading="lazy"
@@ -624,8 +663,8 @@ export default function AboutPage() {
 
                   
                   {/* Decorative Corner Elements */}
-                  <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-orange-400/50 rounded-tr-2xl"></div>
-                  <div className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-cyan-400/50 rounded-bl-2xl"></div>
+                  <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-orange-400/50 rounded-tr-2xl group-hover:border-orange-400/80 group-hover:scale-110 transition-all duration-300"></div>
+                  <div className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-cyan-400/50 rounded-bl-2xl group-hover:border-cyan-400/80 group-hover:scale-110 transition-all duration-300"></div>
                 </div>
               </div>
             </div>
