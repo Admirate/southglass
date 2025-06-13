@@ -420,9 +420,48 @@ export default function GlassSpecifications() {
                         </div>
                       )}
                       
-                      <div className={`glass-card p-0 rounded-lg overflow-hidden ${table.title ? 'rounded-t-none' : ''}`}>
-                        {/* Responsive Table Container */}
-                        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50" style={{ WebkitOverflowScrolling: 'touch' }}>
+                      <div className={`glass-card rounded-lg overflow-hidden ${table.title ? 'rounded-t-none' : ''} relative`}>
+                        {/* Enhanced Responsive Table Container - Full area scrollable */}
+                        <div 
+                          className="relative overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50 scroll-container" 
+                          style={{ 
+                            WebkitOverflowScrolling: 'touch',
+                            scrollBehavior: 'smooth',
+                            scrollSnapType: 'x proximity',
+                            touchAction: 'pan-x'
+                          }}
+                          onScroll={(e) => {
+                            const container = e.currentTarget;
+                            const scrollLeft = container.scrollLeft;
+                            const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                            const scrollPercentage = maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * 100 : 0;
+                            
+                            // Update fade indicators
+                            const leftFade = container.querySelector('.scroll-fade-left') as HTMLElement;
+                            const rightFade = container.querySelector('.scroll-fade-right') as HTMLElement;
+                            const progressBar = container.querySelector('.scroll-progress') as HTMLElement;
+                            
+                            if (leftFade) {
+                              leftFade.style.opacity = scrollLeft > 20 ? '1' : '0';
+                            }
+                            if (rightFade) {
+                              rightFade.style.opacity = scrollLeft < maxScrollLeft - 20 ? '1' : '0';
+                            }
+                            if (progressBar) {
+                              progressBar.style.width = `${scrollPercentage}%`;
+                            }
+                          }}
+                        >
+                          {/* Left Scroll Fade Indicator */}
+                          <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent z-10 pointer-events-none opacity-0 transition-opacity duration-300 scroll-fade-left"></div>
+                          
+                          {/* Right Scroll Fade Indicator */}
+                          <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-gray-900/90 via-gray-900/60 to-transparent z-10 pointer-events-none opacity-100 transition-opacity duration-300 scroll-fade-right"></div>
+                          
+                          {/* Scroll Progress Bar */}
+                          <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800/30 z-10">
+                            <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-150 ease-out scroll-progress" style={{ width: '0%' }}></div>
+                          </div>
                           <table className="w-full" style={{ minWidth: '800px' }}>
                             {/* Table Header */}
                             <thead className="sticky top-0 z-10">
@@ -430,7 +469,8 @@ export default function GlassSpecifications() {
                                 {table.headers.map((header, headerIndex) => (
                                   <th 
                                     key={headerIndex} 
-                                    className={`text-left py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 text-white font-semibold text-xs sm:text-sm uppercase tracking-wide border-r border-gray-600/50 last:border-r-0 whitespace-nowrap ${headerIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-accent/90 z-20' : 'min-w-[140px] w-[140px]'}`}
+                                    className={`text-left py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 text-white font-semibold text-xs sm:text-sm uppercase tracking-wide border-r border-gray-600/50 last:border-r-0 whitespace-nowrap select-none ${headerIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-accent/90 z-20' : 'min-w-[140px] w-[140px]'}`}
+                                    style={{ touchAction: 'pan-x' }}
                                   >
                                     <span className="block leading-tight">
                                       {header.length > 15 ? (
@@ -463,11 +503,12 @@ export default function GlassSpecifications() {
                                     return (
                                       <td 
                                         key={cellIndex} 
-                                        className={`py-2 sm:py-3 px-2 sm:px-3 md:px-4 text-xs sm:text-sm ${
+                                        className={`py-2 sm:py-3 px-2 sm:px-3 md:px-4 text-xs sm:text-sm select-none ${
                                           isBurglarResistantPerformanceColumn 
                                             ? 'border-0' // Remove all borders for performance criteria
                                             : 'border-r border-gray-700/30 last:border-r-0'
                                         } ${cellIndex === 0 ? 'min-w-[120px] w-[120px] sticky left-0 bg-inherit z-10 font-medium' : 'min-w-[140px] w-[140px]'}`}
+                                        style={{ touchAction: 'pan-x' }}
                                       >
                                         {cell.includes('CERTIFIED') ? (
                                           <span className="bg-accent text-white px-1 sm:px-2 py-1 text-xs font-medium rounded whitespace-nowrap block text-center">
@@ -505,11 +546,33 @@ export default function GlassSpecifications() {
                           </table>
                         </div>
                         
-                        {/* Mobile Scroll Hint */}
-                        <div className="block sm:hidden border-t border-gray-700/30 table-scroll-hint px-4 py-2">
-                          <p className="text-xs text-gray-400 text-center font-medium">
-                            ← Scroll horizontally to view all columns →
-                          </p>
+                        {/* Enhanced Mobile Scroll Hint */}
+                        <div className="block sm:hidden border-t border-gray-700/30 table-scroll-hint bg-gradient-to-r from-gray-900/50 to-gray-800/50 px-4 py-3">
+                          <div className="flex items-center justify-center gap-2 text-center">
+                            <div className="flex items-center gap-1">
+                              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                              </svg>
+                            </div>
+                            <p className="text-xs text-gray-300 font-medium px-2">
+                               swipe to explore all columns
+                            </p>
+                            <div className="flex items-center gap-1">
+                              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse animation-delay-500"></div>
+                            </div>
+                          </div>
+                          <div className="flex justify-center mt-2">
+                            <div className="flex gap-1">
+                              <div className="w-6 h-1 bg-blue-500 rounded-full"></div>
+                              <div className="w-3 h-1 bg-gray-600 rounded-full"></div>
+                              <div className="w-3 h-1 bg-gray-600 rounded-full"></div>
+                              <div className="w-3 h-1 bg-gray-600 rounded-full"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
