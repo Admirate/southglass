@@ -136,27 +136,6 @@ export const products: Product[] = [
     ]
   },
   {
-    id: "heated-auto-glass-02",
-    name: "Heated Auto Glass",
-    description: "Automotive glass with integrated heating elements for rapid defrosting and defogging in cold weather conditions.",
-    image: "/product-images/heated_auto_glass.png",
-    categoryId: "automotive",
-    categoryName: "Automotive Glass",
-    type: "Climate Control",
-    features: [
-      "Rapid defrosting capability",
-      "Even heat distribution",
-      "Integrated with vehicle electrical system",
-      "Sensor-compatible design"
-    ],
-    applications: [
-      "Rear windows",
-      "Side mirrors",
-      "Cold climate vehicles",
-      "Premium vehicle models"
-    ]
-  },
-  {
     id: "highspeed-safety-01",
     name: "High-Speed Safety Glass",
     description: "Specialized laminated glass designed for high-speed train applications with superior impact resistance and noise reduction.",
