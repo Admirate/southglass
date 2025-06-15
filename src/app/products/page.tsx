@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Search, Filter, X, ChevronDown, Loader2, Settings } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ProductSkeleton from "@/components/products/ProductSkeleton";
@@ -133,13 +134,16 @@ export default function ProductsPage() {
       <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/70 to-black" />
-          <div 
-            className="w-full h-full transform scale-105 animate-slow-zoom" 
-            style={{
-              backgroundImage: "url('/glass-hero-bg.jpg')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+          <Image 
+            src="/optimized/glass-hero-bg.webp"
+            alt="Premium glass manufacturing background"
+            fill
+            priority
+            quality={90}
+            className="object-cover transform scale-105 animate-slow-zoom"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           />
         </div>
 

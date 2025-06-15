@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Image from 'next/image';
 import StaggeredReveal from '@/components/staggered-reveal';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
@@ -41,10 +42,16 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
         <div className="absolute inset-0 z-0 opacity-75">
           <div className="relative w-full h-full">
-            <img 
-              src="/hero-background.jpg"
+            <Image 
+              src="/optimized/hero-background.webp"
               alt="Glass manufacturing facility" 
-              className="object-cover w-full h-full"
+              fill
+              priority
+              quality={90}
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
           </div>
         </div>
