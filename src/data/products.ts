@@ -240,5 +240,26 @@ export const products: Product[] = [
       "Critical infrastructure",
       "High-security zones"
     ]
+  },
+  {
+    id: "burglar-resistant-04",
+    name: "Burglar Resistant Glass",
+    description: "Multi-layered laminated glass designed to resist forced entry attempts, providing enhanced security for residential and commercial properties.",
+    image: "/product-images/burglar_resistant_glass.png",
+    categoryId: "specialty",
+    categoryName: "Specialty Glass",
+    type: "Security",
+    features: [
+      "Multi-layer laminated construction",
+      "Resists impact and penetration",
+      "Maintains structural integrity",
+      "Available in various security levels"
+    ],
+    applications: [
+      "Residential security windows",
+      "Retail storefronts",
+      "Jewelry stores",
+      "High-value display cases"
+    ]
   }
 ]; 

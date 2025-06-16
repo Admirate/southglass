@@ -169,6 +169,7 @@ export default function AboutPage() {
                       </>
                     }
                     className="text-justify"
+                    backgroundImage="/timeline/oem%20Hyundai.png"
                   />
                 </StaggeredReveal>
                 
@@ -219,6 +220,7 @@ export default function AboutPage() {
                       </>
                     }
                     className="text-justify"
+                    backgroundImage="/timeline/Growth%20Recognition.png"
                   />
                 </StaggeredReveal>
                 
@@ -285,6 +287,7 @@ export default function AboutPage() {
                       </>
                     }
                     className="text-justify"
+                    backgroundImage="/timeline/Industry%20leaders.png"
                   />
                 </StaggeredReveal>
               </div>

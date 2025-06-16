@@ -5,15 +5,24 @@ interface TimelineItemProps {
   title: string;
   description: string | React.ReactNode;
   className?: string;
+  backgroundImage?: string;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, className }) => {
+const TimelineItem: React.FC<TimelineItemProps> = ({ year, title, description, className, backgroundImage }) => {
   return (
     <div className="flex group pl-8 py-8 md:py-10 relative">
       {/* Timeline dot with animation */}
       <div className="absolute left-0 w-8 flex items-center justify-center">
         <div className="w-3 h-3 bg-blue-500 rounded-full z-10 transition-all duration-300 group-hover:scale-125 group-hover:bg-yellow-400"></div>
       </div>
+      
+      {/* Background Image - Only for specific timeline items */}
+      {backgroundImage && (
+        <div 
+          className="absolute inset-0 left-8 bg-cover bg-center bg-no-repeat opacity-65 group-hover:opacity-85 transition-all duration-300 rounded-lg -z-20 brightness-150 contrast-125"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
       
       {/* Content */}
       <div className="flex-1 ml-2">
