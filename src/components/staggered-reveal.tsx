@@ -1,15 +1,17 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, ReactNode } from 'react';
+import React, { useEffect, useRef, ReactNode } from "react";
 
 interface StaggeredRevealProps {
   children: ReactNode;
   delay?: number;
+  staggerChildren?: boolean;
 }
 
-export default function StaggeredReveal({ 
-  children, 
-  delay = 0 
+export default function StaggeredReveal({
+  children,
+  delay = 0,
+  staggerChildren = false,
 }: StaggeredRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -17,43 +19,44 @@ export default function StaggeredReveal({
     const container = containerRef.current;
     if (!container) return;
 
-    // Initialize with hidden state
-    container.style.opacity = '0';
-    container.style.transform = 'translateY(20px)';
-    
-    // Create intersection observer
+    const items = staggerChildren
+      ? Array.from(container.children)
+      : [container];
+
+    items.forEach((el) => {
+      const element = el as HTMLElement;
+      element.style.opacity = "0";
+      element.style.transform = "translateY(32px)";
+      element.style.willChange = "opacity, transform";
+    });
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Add small delay for stagger effect
-            setTimeout(() => {
-              container.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-              container.style.opacity = '1';
-              container.style.transform = 'translateY(0)';
-            }, delay);
-            
-            // Once animated, no need to observe anymore
-            observer.unobserve(container);
-          }
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        items.forEach((el, index) => {
+          const element = el as HTMLElement;
+
+          setTimeout(() => {
+            element.style.transition =
+              "opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+            element.style.opacity = "1";
+            element.style.transform = "translateY(0)";
+            element.style.willChange = "auto";
+          }, delay + index * 80); 
         });
+
+        observer.disconnect();
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
-        rootMargin: '0px 0px -50px 0px' // Trigger slightly before the element comes into view
+        threshold: 0.2,
+        rootMargin: "0px 0px -80px 0px",
       }
     );
 
-    // Start observing
     observer.observe(container);
-
-    // Cleanup
     return () => observer.disconnect();
-  }, [delay]);
+  }, [delay, staggerChildren]);
 
-  return (
-    <div ref={containerRef} className="opacity-0">
-      {children}
-    </div>
-  );
-} 
+  return <div ref={containerRef}>{children}</div>;
+}
