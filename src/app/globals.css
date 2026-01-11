@@ -354,3 +354,73 @@
 .animate-slow-zoom {
   animation: slow-zoom 25s infinite alternate ease-in-out;
 }
+
+/* Added animations */
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shine {
+  animation: shine 1.2s ease-in-out;
+}
+
+.shine-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+    110deg,
+    #ffffff 40%,
+    #dbeafe 50%,
+    #ffffff 60%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineMove 10s ease-in-out infinite;
+}
+
+@keyframes shineMove {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
