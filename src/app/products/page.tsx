@@ -1,12 +1,20 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Search, Filter, X, ChevronDown, Loader2, Settings } from "lucide-react";
+import {
+  Search,
+  Filter,
+  X,
+  ChevronDown,
+  Loader2,
+  Settings,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import ProductSkeleton from "@/components/products/ProductSkeleton";
+import StaggeredReveal from "@/components/staggered-reveal";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { Product } from "@/types/products";
 
@@ -27,71 +35,82 @@ export default function ProductsPage() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Categories and types for filters
   const [categories, setCategories] = useState<string[]>([]);
   const [types, setTypes] = useState<string[]>([]);
 
   // Fetch products from API
-  const fetchProducts = useCallback(async (pageNum: number, isNewSearch: boolean = false) => {
-    if (isLoading || (!hasMore && !isNewSearch)) return;
-    
-    setIsLoading(true);
-    setError(null);
-    
-    try {
-      const params = new URLSearchParams({
-        page: pageNum.toString(),
-        limit: PRODUCTS_PER_PAGE.toString(),
-        ...(filters.category && { category: filters.category }),
-        ...(filters.type && { type: filters.type }),
-        ...(filters.search && { search: filters.search }),
-      });
-      
-      const response = await fetch(`/api/products?${params}`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
-      }
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        if (isNewSearch) {
-          setProducts(data.data);
-        } else {
-          setProducts(prev => [...prev, ...data.data]);
+  const fetchProducts = useCallback(
+    async (pageNum: number, isNewSearch: boolean = false) => {
+      if (isLoading || (!hasMore && !isNewSearch)) return;
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const params = new URLSearchParams({
+          page: pageNum.toString(),
+          limit: PRODUCTS_PER_PAGE.toString(),
+          ...(filters.category && { category: filters.category }),
+          ...(filters.type && { type: filters.type }),
+          ...(filters.search && { search: filters.search }),
+        });
+
+        const response = await fetch(`/api/products?${params}`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
         }
-        
-        setHasMore(data.meta.hasMore);
-        
-        // Extract unique categories and types for filters
-        const allProducts = isNewSearch ? data.data : [...products, ...data.data];
-        const uniqueCategories = [...new Set(allProducts.map((p: Product) => p.categoryName).filter(Boolean))] as string[];
-        const uniqueTypes = [...new Set(allProducts.map((p: Product) => p.type))] as string[];
-        setCategories(uniqueCategories);
-        setTypes(uniqueTypes);
+
+        const data = await response.json();
+
+        if (data.success) {
+          if (isNewSearch) {
+            setProducts(data.data);
+          } else {
+            setProducts((prev) => [...prev, ...data.data]);
+          }
+
+          setHasMore(data.meta.hasMore);
+
+          // Extract unique categories and types for filters
+          const allProducts = isNewSearch
+            ? data.data
+            : [...products, ...data.data];
+          const uniqueCategories = [
+            ...new Set(
+              allProducts.map((p: Product) => p.categoryName).filter(Boolean)
+            ),
+          ] as string[];
+          const uniqueTypes = [
+            ...new Set(allProducts.map((p: Product) => p.type)),
+          ] as string[];
+          setCategories(uniqueCategories);
+          setTypes(uniqueTypes);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching products:", err);
+      } finally {
+        setIsLoading(false);
+        setIsInitialLoading(false);
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('Error fetching products:', err);
-    } finally {
-      setIsLoading(false);
-      setIsInitialLoading(false);
-    }
-  }, [filters, hasMore, isLoading, products]);
+    },
+    [filters, hasMore, isLoading, products]
+  );
 
   // Load more products
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
     }
   }, [isLoading, hasMore]);
 
   // Set up infinite scroll
   const infiniteScrollRef = useInfiniteScroll(loadMore, {
     enabled: hasMore && !isLoading,
-    rootMargin: '200px',
+    rootMargin: "200px",
   });
 
   // Initial load
@@ -134,7 +153,7 @@ export default function ProductsPage() {
       <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/70 to-black" />
-          <Image 
+          <Image
             src="/optimized/glass-hero-bg.webp"
             alt="Premium glass manufacturing background"
             fill
@@ -148,17 +167,51 @@ export default function ProductsPage() {
         </div>
 
         <div className="container mx-auto px-4 z-10">
-          <div className="max-w-2xl space-y-6">
+          <div
+            className="
+      max-w-2xl space-y-6
+      opacity-0
+      translate-x-[-56px]
+      animate-[slideInLeft_1.3s_cubic-bezier(0.22,1,0.36,1)_forwards]
+    "
+          >
             <div className="space-y-2">
-              <div className="inline-block bg-blue-500/20 text-blue-400 px-4 py-1 rounded-full text-sm font-medium">
-                Premium Quality
+              {/* Premium Quality with contained shine */}
+              <div className="relative inline-block overflow-hidden rounded-full">
+                <div className="inline-block bg-blue-500/20 text-blue-400 px-4 py-1 rounded-full text-sm font-medium relative z-10">
+                  Premium Quality
+                </div>
+
+                {/* Shine layer (inside only) */}
+                <span
+                  className="
+            pointer-events-none
+            absolute inset-0
+            bg-gradient-to-r
+            from-transparent
+            via-white/35
+            to-transparent
+            translate-x-[-120%]
+            animate-[shine_3.2s_ease-in-out_infinite]
+          "
+                />
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+
+              <h1
+                className="
+          text-3xl sm:text-4xl md:text-5xl
+          font-bold tracking-tight
+          bg-gradient-to-r from-white to-gray-400
+          bg-clip-text text-transparent
+        "
+              >
                 Premium Glass Solutions
               </h1>
             </div>
+
             <p className="text-base sm:text-lg md:text-xl text-gray-300">
-              Discover our collection of high-quality glass products for architectural, automotive, and specialty applications.
+              Discover our collection of high-quality glass products for
+              architectural, automotive, and specialty applications.
             </p>
           </div>
         </div>
@@ -167,21 +220,38 @@ export default function ProductsPage() {
       {/* Technical Specifications Link */}
       <div className="border-b border-white/10 bg-black/60 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-center sm:text-left">
-              <h3 className="text-lg font-semibold text-white mb-2">Need Technical Data?</h3>
-              <p className="text-gray-400 text-sm">
-                View comprehensive specifications, standards, and certifications for all our glass products.
-              </p>
-            </div>
-            <Link 
-              href="/specifications" 
-              className="glass-button px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-accent/20 transition-all duration-300 border border-accent/50"
+          <StaggeredReveal delay={800}>
+            <div
+              className="
+          flex flex-col sm:flex-row items-center justify-between gap-4
+          opacity-0
+          translate-x-[-48px]
+          animate-[slideInLeft_1.1s_cubic-bezier(0.4,0,0.2,1)_forwards]
+        "
             >
-              <Settings className="h-5 w-5 text-accent" />
-              <span className="text-white font-medium">View Technical Specifications</span>
-            </Link>
-          </div>
+              {/* TEXT */}
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Need Technical Data?
+                </h3>
+                <p className="text-gray-400 text-sm">
+                  View comprehensive specifications, standards, and
+                  certifications for all our glass products.
+                </p>
+              </div>
+
+              {/* BUTTON */}
+              <Link
+                href="/specifications"
+                className="glass-button px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-accent/20 transition-all duration-300 border border-accent/50"
+              >
+                <Settings className="h-5 w-5 text-accent" />
+                <span className="text-white font-medium">
+                  View Technical Specifications
+                </span>
+              </Link>
+            </div>
+          </StaggeredReveal>
         </div>
       </div>
 
@@ -197,7 +267,9 @@ export default function ProductsPage() {
                   type="text"
                   placeholder="Search products..."
                   value={filters.search}
-                  onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+                  onChange={(e) =>
+                    setFilters({ ...filters, search: e.target.value })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all text-sm backdrop-blur-sm"
                 />
               </div>
@@ -207,36 +279,52 @@ export default function ProductsPage() {
               >
                 <Filter className="h-5 w-5" />
                 <span className="hidden sm:inline">Filters</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${showFilters ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${
+                    showFilters ? "rotate-180" : ""
+                  }`}
+                />
               </button>
             </div>
 
             {/* Expandable Filters */}
-            <div className={`${showFilters ? 'max-h-96' : 'max-h-0'} overflow-hidden transition-all duration-300 ease-in-out`}>
+            <div
+              className={`${
+                showFilters ? "max-h-96" : "max-h-0"
+              } overflow-hidden transition-all duration-300 ease-in-out`}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-3">
                 <div className="relative group">
-                  <select 
+                  <select
                     className="appearance-none w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all text-sm backdrop-blur-sm [&>option]:text-black"
                     value={filters.category}
-                    onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+                    onChange={(e) =>
+                      setFilters({ ...filters, category: e.target.value })
+                    }
                   >
                     <option value="">All Categories</option>
                     {categories.map((category) => (
-                      <option key={category} value={category}>{category}</option>
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
                     ))}
                   </select>
                   <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
                 </div>
 
                 <div className="relative group">
-                  <select 
+                  <select
                     className="appearance-none w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all text-sm backdrop-blur-sm [&>option]:text-black"
                     value={filters.type}
-                    onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+                    onChange={(e) =>
+                      setFilters({ ...filters, type: e.target.value })
+                    }
                   >
                     <option value="">All Types</option>
                     {types.map((type) => (
-                      <option key={type} value={type}>{type}</option>
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
                     ))}
                   </select>
                   <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
@@ -248,8 +336,10 @@ export default function ProductsPage() {
                 <div className="flex flex-wrap gap-2 pt-2">
                   {filters.category && (
                     <div className="bg-blue-500/10 text-blue-400 rounded-full px-4 py-1.5 text-sm flex items-center gap-2 border border-blue-500/20">
-                      <span className="truncate max-w-[150px]">Category: {filters.category}</span>
-                      <button 
+                      <span className="truncate max-w-[150px]">
+                        Category: {filters.category}
+                      </span>
+                      <button
                         onClick={() => setFilters({ ...filters, category: "" })}
                         className="hover:text-white transition-colors flex-shrink-0"
                       >
@@ -259,8 +349,10 @@ export default function ProductsPage() {
                   )}
                   {filters.type && (
                     <div className="bg-blue-500/10 text-blue-400 rounded-full px-4 py-1.5 text-sm flex items-center gap-2 border border-blue-500/20">
-                      <span className="truncate max-w-[150px]">Type: {filters.type}</span>
-                      <button 
+                      <span className="truncate max-w-[150px]">
+                        Type: {filters.type}
+                      </span>
+                      <button
                         onClick={() => setFilters({ ...filters, type: "" })}
                         className="hover:text-white transition-colors flex-shrink-0"
                       >
@@ -287,24 +379,36 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-wrap justify-between items-center mb-8">
+          {/* LEFT : Our Products */}
           <div className="w-full md:w-1/4">
-            <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-              Our Products
-            </h2>
-            <p className="text-gray-400 mt-1">
-              {isInitialLoading ? 'Loading...' : `${products.length} products loaded`}
-            </p>
+            <StaggeredReveal delay={0}>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                  Our Products
+                </h2>
+                <p className="text-gray-400 mt-1">
+                  {isInitialLoading
+                    ? "Loading..."
+                    : `${products.length} products loaded`}
+                </p>
+              </div>
+            </StaggeredReveal>
           </div>
-          
-          <div className="hidden md:block text-center w-2/4">
-            <h2 className="text-3xl font-bold text-[#3BA6C4]">
-              Built with Legacy.Backed by Leaders.
-            </h2>
+
+          {/* CENTER : Built with Legacy */}
+          <div className="w-full md:w-2/4 text-center mt-6 md:mt-0">
+            <StaggeredReveal delay={220}>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#3BA6C4]">
+                  Built with Legacy. Backed by Leaders.
+                </h2>
+              </div>
+            </StaggeredReveal>
           </div>
-          
-          <div className="w-full md:w-1/4"></div>
+
+          <div className="w-full md:w-1/4" />
         </div>
-        
+
         {/* Error State */}
         {error && !isInitialLoading && (
           <div className="text-center py-12">
@@ -319,7 +423,6 @@ export default function ProductsPage() {
             </div>
           </div>
         )}
-
         {/* Initial Loading State */}
         {isInitialLoading && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -328,80 +431,103 @@ export default function ProductsPage() {
             ))}
           </div>
         )}
-
         {/* Products Grid */}
         {!isInitialLoading && !error && (
           <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {products.map((product) => (
-            <div 
-              key={product.id}
-              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:transform hover:-translate-y-1 transition-all duration-300 border border-white/10 hover:border-white/20"
-            >
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
-                <div 
-                  className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
-                  style={{
-                    backgroundImage: product.image ? `url(${product.image})` : undefined,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                />
-                {product.featured && (
-                  <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
-                    Featured
-                  </div>
-                )}
-              </div>
-              
-              <div className="p-6">
-                <div className="flex justify-between items-start gap-4 mb-3">
-                  <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
-                    {product.name}
-                  </h3>
-                  <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
-                    {product.type}
-                  </div>
-                </div>
-                
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2">
-                  {product.description}
-                </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {products.map((product, index) => (
+                <StaggeredReveal key={product.id} delay={index * 80}>
+                  <div
+                    className="
+          group relative
+          bg-white/5 backdrop-blur-sm
+          rounded-2xl overflow-hidden
+          hover:transform hover:-translate-y-1
+          transition-all duration-300
+          border border-white/10 hover:border-white/20
+        "
+                  >
+                    <div className="aspect-[4/3] overflow-hidden relative">
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/70 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300" />
+                      <div
+                        className="w-full h-full bg-blue-500/30 group-hover:bg-blue-500/40 transition-colors duration-300"
+                        style={{
+                          backgroundImage: product.image
+                            ? `url(${product.image})`
+                            : undefined,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      />
+                      {product.featured && (
+                        <div className="absolute top-4 right-4 z-20 bg-blue-500 text-black text-xs font-semibold py-1.5 px-3 rounded-full">
+                          Featured
+                        </div>
+                      )}
+                    </div>
 
-                {/* Features */}
-                {product.features && (
-                  <div className="mb-4">
-                    <h4 className="font-medium mb-2 text-sm text-gray-300">Key Features</h4>
-                    <ul className="space-y-2">
-                      {product.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                          <span className="line-clamp-1">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                    <div className="p-6">
+                      <div className="flex justify-between items-start gap-4 mb-3">
+                        <h3 className="text-lg font-bold group-hover:text-blue-400 transition-colors duration-300">
+                          {product.name}
+                        </h3>
+                        <div className="bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs font-medium">
+                          {product.type}
+                        </div>
+                      </div>
 
-                {/* Applications */}
-                {product.applications && (
-                  <div>
-                    <h4 className="font-medium mb-2 text-sm text-gray-300">Applications</h4>
-                    <ul className="space-y-2">
-                      {product.applications.slice(0, 2).map((application, index) => (
-                        <li key={index} className="text-sm text-gray-400 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
-                          <span className="line-clamp-1">{application}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+                        {product.description}
+                      </p>
+
+                      {/* Features */}
+                      {product.features && (
+                        <div className="mb-4">
+                          <h4 className="font-medium mb-2 text-sm text-gray-300">
+                            Key Features
+                          </h4>
+                          <ul className="space-y-2">
+                            {product.features.slice(0, 3).map((feature, i) => (
+                              <li
+                                key={i}
+                                className="text-sm text-gray-400 flex items-center gap-2"
+                              >
+                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                                <span className="line-clamp-1">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Applications */}
+                      {product.applications && (
+                        <div>
+                          <h4 className="font-medium mb-2 text-sm text-gray-300">
+                            Applications
+                          </h4>
+                          <ul className="space-y-2">
+                            {product.applications
+                              .slice(0, 2)
+                              .map((application, i) => (
+                                <li
+                                  key={i}
+                                  className="text-sm text-gray-400 flex items-center gap-2"
+                                >
+                                  <span className="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0" />
+                                  <span className="line-clamp-1">
+                                    {application}
+                                  </span>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
-              </div>
+                </StaggeredReveal>
+              ))}
             </div>
-          ))}
-        </div>
 
             {/* Loading More Indicator */}
             {isLoading && !isInitialLoading && (
@@ -417,13 +543,23 @@ export default function ProductsPage() {
 
             {/* End of Products Message */}
             {!hasMore && products.length > 0 && (
-              <div className="text-center py-12">
-                <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-md mx-auto">
-                  <p className="text-gray-400">
-                    You've reached the end! That's all {products.length} products.
-                  </p>
+              <StaggeredReveal>
+                <div
+                  className="
+      text-center py-12
+      opacity-0
+      translate-y-[24px]
+      animate-[fadeUpBounce_0.9s_cubic-bezier(0.34,1.56,0.64,1)_forwards]
+    "
+                >
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-md mx-auto">
+                    <p className="text-gray-400">
+                      You've reached the end! That's all {products.length}{" "}
+                      products.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </StaggeredReveal>
             )}
 
             {/* No Products Found */}
@@ -431,7 +567,9 @@ export default function ProductsPage() {
               <div className="text-center py-12">
                 <div className="bg-white/5 border border-white/10 rounded-xl p-8 max-w-md mx-auto">
                   <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">No products found</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    No products found
+                  </h3>
                   <p className="text-gray-400">
                     Try adjusting your filters or search query
                   </p>
@@ -454,4 +592,4 @@ export default function ProductsPage() {
       <Footer />
     </div>
   );
-} 
+}
