@@ -13,7 +13,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import JsonLd from "@/components/JsonLd";
-import TypingText from "@/components/Typingtext";
+import TypingText from "@/components/TypingText";
 // Add About page structured data
 const aboutPageSchema = {
   "@context": "https://schema.org",
