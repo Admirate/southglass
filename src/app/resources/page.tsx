@@ -1,22 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ArrowDown, Book, Eye, FileText } from 'lucide-react';
-import Link from 'next/link';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import SectionHeading from '@/components/section-heading';
-import JsonLd from '@/components/JsonLd';
+import { useState } from "react";
+import { ArrowDown, Book, Eye, FileText } from "lucide-react";
+import Link from "next/link";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import SectionHeading from "@/components/section-heading";
+import JsonLd from "@/components/JsonLd";
 import StaggeredReveal from "@/components/staggered-reveal";
-import BrochureLink from '@/components/BrochureLink';
+import BrochureLink from "@/components/BrochureLink";
 
 // Add Resources page structured data
 const resourcesPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "South Glass Resources",
-  "description": "Download brochures and resources about South Glass products and services.",
-  "url": "https://southglass.com/resources",
+  name: "South Glass Resources",
+  description:
+    "Download brochures and resources about South Glass products and services.",
+  url: "https://southglass.com/resources",
 };
 
 // Brochure data
@@ -24,21 +25,23 @@ const brochures = [
   {
     id: 1,
     title: "Brand Brochure",
-    description: "An overview of South Glass, our brand identity, values, and vision.",
+    description:
+      "An overview of South Glass, our brand identity, values, and vision.",
     thumbnail: "/brochure-thumbnails/brand-brochure-thumb.jpg",
     file: "/brochures/SG-BRAND Brochure.pdf",
     pages: 15,
-    size: "1.1 MB"
+    size: "1.1 MB",
   },
   {
     id: 2,
     title: "Product Catalogue",
-    description: "Detailed specifications and applications of our entire product lineup.",
+    description:
+      "Detailed specifications and applications of our entire product lineup.",
     thumbnail: "/brochure-thumbnails/product-catalogue-thumb.jpg",
     file: "/brochures/SG-PRODUCT BROCHURE-FINAL.pdf",
     pages: 32,
-    size: "2.8 MB"
-  }
+    size: "2.8 MB",
+  },
 ];
 
 export default function ResourcesPage() {
@@ -58,9 +61,9 @@ export default function ResourcesPage() {
       setTimeout(() => {
         setPreviewHeight(400);
         // Scroll to the preview section with smooth behavior
-        document.getElementById(`preview-${id}`)?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
+        document.getElementById(`preview-${id}`)?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
         });
       }, 100);
     }
@@ -124,15 +127,15 @@ export default function ResourcesPage() {
             {brochures.map((brochure, index) => (
               <StaggeredReveal key={brochure.id} delay={index * 120}>
                 <div
-                  className={`
+                  className="
         bg-gradient-to-br from-gray-900/90 to-gray-800/60
         rounded-xl overflow-hidden shadow-lg
         border border-white/10
         group hover:border-blue-500/40
         transition-all duration-300
-        ${index % 2 === 0 ? "translate-x-[-48px]" : "translate-x-[48px]"}
-      `}
+      "
                 >
+                  {/* rest of your card code EXACTLY SAME */}
                   <div className="relative">
                     <div className="aspect-video bg-gray-800/80 w-full overflow-hidden">
                       {brochure.thumbnail ? (
@@ -261,4 +264,4 @@ export default function ResourcesPage() {
       <Footer />
     </div>
   );
-} 
+}
