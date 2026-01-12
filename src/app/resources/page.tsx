@@ -135,7 +135,7 @@ export default function ResourcesPage() {
         transition-all duration-300
       "
                 >
-                  {/* rest of your card code EXACTLY SAME */}
+                 
                   <div className="relative">
                     <div className="aspect-video bg-gray-800/80 w-full overflow-hidden">
                       {brochure.thumbnail ? (
