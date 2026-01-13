@@ -94,7 +94,7 @@ export default function Home() {
 
               <div className="h-px w-24 bg-gradient-to-r from-blue-400 to-transparent mx-auto my-6"></div>
               <TypingText
-                text="BBuilt on experience, defined by precision."
+                text="Built on experience, defined by precision."
                 className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-semibold leading-relaxed"
               />
             </div>
