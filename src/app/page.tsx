@@ -27,6 +27,7 @@ import Footer from "@/components/footer";
 import Link from "next/link";
 import JsonLd, { companySchema } from "@/components/JsonLd";
 import TypingText from "@/components/TypingText";
+import { useParallax } from "@/hooks/useParallax";
 
 export default function Home() {
   const clients = [
@@ -45,6 +46,8 @@ export default function Home() {
     { logo: "/clients/client 14.jpg" },
   ];
 
+  useParallax();
+
   return (
     <div className="min-h-screen bg-primary text-blue-100">
       <JsonLd data={companySchema} />
@@ -54,7 +57,11 @@ export default function Home() {
 
       {/* Hero Section - Updated to match About page style */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
-        <div className="absolute inset-0 z-0 opacity-75">
+        <div
+          className="absolute inset-0 z-0 opacity-75 will-change-transform"
+          data-parallax
+          data-parallax-speed="0.25"
+        >
           <div className="relative w-full h-full">
             <Image
               src="/optimized/hero-background.webp"
