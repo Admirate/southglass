@@ -13,6 +13,7 @@
     "generate-sri": "node scripts/generate-sri-hashes.js"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "crypto-js": "^4.2.0",
