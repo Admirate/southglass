@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TypingTextProps {
   text: string;
@@ -10,53 +10,22 @@ interface TypingTextProps {
 
 export default function TypingText({
   text,
-  speed = 80,
+  speed = 40,
   className = "",
 }: TypingTextProps) {
-  const [displayedText, setDisplayedText] = useState("");
-  const [startTyping, setStartTyping] = useState(false);
-  const indexRef = useRef(0);
-  const ref = useRef<HTMLParagraphElement>(null);
+  const [index, setIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
 
-  // Start typing only when visible
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (index > text.length) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStartTyping(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.6 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Typing logic 
-  useEffect(() => {
-    if (!startTyping) return;
-
-    const interval = setInterval(() => {
-      if (indexRef.current >= text.length) {
-        clearInterval(interval);
-        return;
-      }
-
-      setDisplayedText((prev) => prev + text.charAt(indexRef.current));
-      indexRef.current += 1;
+    const timeout = setTimeout(() => {
+      setDisplayed(text.slice(0, index));
+      setIndex((prev) => prev + 1);
     }, speed);
 
-    return () => clearInterval(interval);
-  }, [startTyping, text, speed]);
+    return () => clearTimeout(timeout);
+  }, [index, text, speed]);
 
-  return (
-    <p ref={ref} className={className}>
-      {displayedText}
-    </p>
-  );
+  return <p className={className}>{displayed}</p>;
 }
