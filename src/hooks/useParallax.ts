@@ -1,26 +1,71 @@
+"use client";
 
 import { useEffect } from "react";
 
 export function useParallax(selector = "[data-parallax]") {
   useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>(selector)
-    );
+    if (typeof window === "undefined") return;
 
-    if (!elements.length) return;
+    // Respect reduced motion (accessibility)
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) return;
+
+    let rafId: number | null = null;
+    let elements: HTMLElement[] = [];
+    let scrollHandlerAttached = false;
+
+    const collectElements = () => {
+      elements = Array.from(
+        document.querySelectorAll<HTMLElement>(selector)
+      );
+      return elements.length > 0;
+    };
 
     const onScroll = () => {
       const scrollY = window.scrollY;
 
       elements.forEach((el) => {
-        const speed = Number(el.dataset.parallaxSpeed ?? 0.15);
+        const speed = Number(el.dataset.parallaxSpeed);
+
+        if (Number.isNaN(speed)) return;
+
         el.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
       });
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const init = () => {
+      if (!collectElements()) {
+        rafId = requestAnimationFrame(init);
+        return;
+      }
 
-    return () => window.removeEventListener("scroll", onScroll);
+      onScroll();
+
+      if (!scrollHandlerAttached) {
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", collectElements);
+        scrollHandlerAttached = true;
+      }
+    };
+
+    rafId = requestAnimationFrame(init);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+
+      if (scrollHandlerAttached) {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", collectElements);
+      }
+
+      elements.forEach((el) => {
+        el.style.transform = "";
+      });
+
+      elements = [];
+    };
   }, [selector]);
 }
