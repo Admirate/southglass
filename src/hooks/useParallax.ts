@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect } from "react";
@@ -9,20 +8,22 @@ export function useParallax(selector = "[data-parallax]") {
       document.querySelectorAll<HTMLElement>(selector)
     );
 
-    if (!elements.length) return;
+    if (elements.length === 0) return;
 
     const onScroll = () => {
       const scrollY = window.scrollY;
-
       elements.forEach((el) => {
-        const speed = Number(el.dataset.parallaxSpeed ?? 0.15);
+        const speed = Number(el.dataset.parallaxSpeed ?? 0.25);
         el.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
       });
     };
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Try document instead of window
+    document.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // initial position
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
   }, [selector]);
 }
