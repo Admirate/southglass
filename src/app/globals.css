@@ -15,7 +15,7 @@
   /* Improved base responsive settings */
   html {
     font-size: 16px;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
   @media (max-width: 640px) {
