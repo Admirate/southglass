@@ -1,8 +1,18 @@
-'use client';
+"use client";
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { ArrowRight, Award, Building2, ChevronRight, Factory, Shield, MapPin, Check, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Award,
+  Building2,
+  ChevronRight,
+  Factory,
+  Shield,
+  MapPin,
+  Check,
+  Sparkles,
+} from "lucide-react";
 import SectionHeading from "@/components/section-heading";
 import TimelineItem from "@/components/timeline-item";
 import CertificationCard from "@/components/certification-card";
@@ -14,60 +24,67 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import JsonLd from "@/components/JsonLd";
 import TypingText from "@/components/TypingText";
+import { useParallax } from "@/hooks/useParallax";
+
 // Add About page structured data
 const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "name": "About South Glass",
-  "description": "Learn about South Glass's history, mission, vision, infrastructure, certifications and commitment to quality since 2014.",
-  "url": "https://southglass.com/about",
-  "mainEntity": {
+  name: "About South Glass",
+  description:
+    "Learn about South Glass's history, mission, vision, infrastructure, certifications and commitment to quality since 2014.",
+  url: "https://southglass.com/about",
+  mainEntity: {
     "@type": "Organization",
-    "name": "South Glass",
-    "foundingDate": "2014",
-    "description": "Premium glass manufacturer specializing in architectural, automotive and specialty glass solutions with advanced manufacturing facilities in India.",
-    "address": {
+    name: "South Glass",
+    foundingDate: "2014",
+    description:
+      "Premium glass manufacturer specializing in architectural, automotive and specialty glass solutions with advanced manufacturing facilities in India.",
+    address: {
       "@type": "PostalAddress",
-      "addressCountry": "India",
-      "addressLocality": "Hyderabad"
+      addressCountry: "India",
+      addressLocality: "Hyderabad",
     },
-    "award": [
+    award: [
       {
         "@type": "Award",
-        "name": "Facade of the Year - One Golden Mile Project",
-        "description": "Landmark project solely supplied by South Glass"
-      }
+        name: "Facade of the Year - One Golden Mile Project",
+        description: "Landmark project solely supplied by South Glass",
+      },
     ],
-    "hasCredential": [
+    hasCredential: [
       {
         "@type": "EducationalOccupationalCredential",
-        "name": "BIS Certification",
-        "credentialCategory": "Indian standards certification"
+        name: "BIS Certification",
+        credentialCategory: "Indian standards certification",
       },
       {
         "@type": "EducationalOccupationalCredential",
-        "name": "ISO Certification",
-        "credentialCategory": "Global quality benchmarks"
+        name: "ISO Certification",
+        credentialCategory: "Global quality benchmarks",
       },
       {
         "@type": "EducationalOccupationalCredential",
-        "name": "ARAI Certification",
-        "credentialCategory": "Automotive-grade approval"
+        name: "ARAI Certification",
+        credentialCategory: "Automotive-grade approval",
       },
       {
         "@type": "EducationalOccupationalCredential",
-        "name": "NABL Certification",
-        "credentialCategory": "Lab-tested assurance"
-      }
-    ]
-  }
+        name: "NABL Certification",
+        credentialCategory: "Lab-tested assurance",
+      },
+    ],
+  },
 };
 
 export default function AboutPage() {
+
+  useParallax(); // parallax hook
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
-  
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (cardRef.current) {
       const rect = cardRef.current.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -75,7 +92,7 @@ export default function AboutPage() {
       setMousePosition({ x, y });
     }
   };
-  
+
   // counter (120+)
   const counterRef = useRef<HTMLDivElement>(null);
   const [startCount, setStartCount] = useState(false);
@@ -116,7 +133,11 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24">
-        <div className="absolute inset-0 z-0 opacity-75">
+        <div
+          data-parallax
+          data-parallax-speed="0.25"
+          className="absolute inset-[-10%] z-0 opacity-75 will-change-transform"
+        >
           <div className="relative w-full h-full">
             <Image
               src="/optimized/about page .webp"
@@ -127,7 +148,7 @@ export default function AboutPage() {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA..."
             />
           </div>
         </div>
@@ -1025,4 +1046,4 @@ export default function AboutPage() {
       <Footer />
     </div>
   );
-} 
+}
