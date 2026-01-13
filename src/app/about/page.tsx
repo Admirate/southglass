@@ -134,23 +134,20 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24">
         <div
-          data-parallax
-          data-parallax-speed="0.25"
-          className="absolute inset-[-10%] z-0 opacity-75 will-change-transform"
-        >
-          <div className="relative w-full h-full">
-            <Image
-              src="/optimized/about page .webp"
-              alt="South Glass manufacturing facility interior view"
-              fill
-              priority
-              quality={90}
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA..."
-            />
-          </div>
+    data-parallax
+    data-parallax-speed="0.4"
+    className="absolute inset-0 z-0 opacity-80 will-change-transform"
+  >
+    <Image
+      src="/optimized/about page .webp"
+      alt="South Glass manufacturing facility interior view"
+      fill
+      priority
+      quality={90}
+      className="object-cover scale-110"
+      sizes="100vw"
+    />
+  </div>
         </div>
 
         {/* Modern gradient overlay - reduced darkness */}
