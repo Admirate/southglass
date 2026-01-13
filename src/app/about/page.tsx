@@ -24,8 +24,6 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import JsonLd from "@/components/JsonLd";
 import TypingText from "@/components/TypingText";
-import { useParallax } from "@/hooks/useParallax";
-
 // Add About page structured data
 const aboutPageSchema = {
   "@context": "https://schema.org",
@@ -78,9 +76,6 @@ const aboutPageSchema = {
 };
 
 export default function AboutPage() {
-
-  useParallax(); // parallax hook
-
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -133,14 +128,10 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24">
-        <div
-          data-parallax
-          data-parallax-speed="0.25"
-          className="absolute inset-[-10%] z-0 opacity-75 will-change-transform"
-        >
+        <div className="absolute inset-0 z-0 opacity-75">
           <div className="relative w-full h-full">
             <Image
-              src="/optimized/about page.webp"
+              src="/optimized/about page .webp"
               alt="South Glass manufacturing facility interior view"
               fill
               priority
@@ -148,7 +139,7 @@ export default function AboutPage() {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
               placeholder="blur"
-               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
             />
           </div>
         </div>
@@ -1046,4 +1037,5 @@ export default function AboutPage() {
       <Footer />
     </div>
   );
-}
+} 
+
