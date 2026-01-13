@@ -133,21 +133,15 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24">
-        <div
+        <div className="relative overflow-hidden h-screen">
+  <img
+    src="/optimized/about page.webp"
     data-parallax
     data-parallax-speed="0.4"
-    className="absolute inset-0 z-0 opacity-80 will-change-transform"
-  >
-    <Image
-      src="/optimized/about page .webp"
-      alt="South Glass manufacturing facility interior view"
-      fill
-      priority
-      quality={90}
-      className="object-cover scale-110"
-      sizes="100vw"
-    />
-  </div>
+    className="absolute inset-0 w-full h-[120%] object-cover"
+  />
+</div>
+
         </div>
 
         {/* Modern gradient overlay - reduced darkness */}
