@@ -162,7 +162,7 @@ export default function AboutPage() {
                 </StaggeredReveal>
 
                 <TypingText
-                  text="EETHICS . EXPERTISE . EXECUTION"
+                  text="ETHICS . EXPERTISE . EXECUTION"
                   speed={90}
                   className="text-[#3BA6C4] tracking-[0.15em] sm:tracking-[0.25em] text-xl sm:text-2xl font-light"
                 />
