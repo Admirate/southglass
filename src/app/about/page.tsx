@@ -140,7 +140,7 @@ export default function AboutPage() {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/optimized/about page .webp"
+              src="/optimized/about page.webp"
               alt="South Glass manufacturing facility interior view"
               fill
               priority
