@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import CriticalPreload from "@/components/critical-preload";
 import Script from "next/script";
+import LenisProvider from "@/components/LenisProvider";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -113,9 +114,10 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black min-h-screen`}>
         <CriticalPreload />
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
-        <main id="main-content">
-          {children}
-        </main>
+        
+        <LenisProvider>
+          <main id="main-content">{children}</main>
+        </LenisProvider>
         
         {/* Structured data for organization */}
         <Script
