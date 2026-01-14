@@ -8,31 +8,40 @@ export function useParallax(selector = "[data-parallax]") {
     let rafId: number;
 
     const collectElements = () => {
-      elements = Array.from(
-        document.querySelectorAll<HTMLElement>(selector)
-      );
-      return elements.length > 0;
+      elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
     };
 
+    collectElements();
+
+    const onScroll = (scroll: number) => {
+      elements.forEach((el) => {
+        const speed = Number(el.dataset.parallaxSpeed ?? 0.15);
+        el.style.transform = `translate3d(0, ${scroll * speed}px, 0)`;
+      });
+    };
+
+    // 🔑 If Lenis exists, use it
+    if ((window as any).lenis) {
+      const lenis = (window as any).lenis;
+
+      const handler = ({ scroll }: { scroll: number }) => {
+        onScroll(scroll);
+      };
+
+      lenis.on("scroll", handler);
+
+      return () => {
+        lenis.off("scroll", handler);
+        elements.forEach((el) => (el.style.transform = ""));
+      };
+    }
+
+    //  Fallback (no Lenis)
     const loop = () => {
-      //  keep trying until elements appear (production fix)
-      if (!elements.length) {
-        collectElements();
-      }
+      const scrollY =
+        window.pageYOffset || document.documentElement.scrollTop || 0;
 
-      if (elements.length) {
-        const scrollY =
-          (window as any).__lenis?.scroll ??
-          window.pageYOffset ??
-          document.documentElement.scrollTop ??
-          0;
-
-        elements.forEach((el) => {
-          const speed = Number(el.dataset.parallaxSpeed ?? 0.15);
-          el.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
-        });
-      }
-
+      onScroll(scrollY);
       rafId = requestAnimationFrame(loop);
     };
 
