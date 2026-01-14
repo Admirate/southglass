@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import CriticalPreload from "@/components/critical-preload";
 import Script from "next/script";
-import { LenisProvider } from "@/app/providers/LenisProvider";
+import { LenisProvider } from "./providers/LenisProvider";
 
 const inter = Inter({ 
   subsets: ["latin"],
