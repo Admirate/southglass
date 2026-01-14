@@ -116,7 +116,9 @@ export default function RootLayout({
         <a href="#main-content" className="sr-only focus:not-sr-only">Skip to main content</a>
         
        <LenisProvider>
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="min-h-screen">
+            {children}
+          </main>
         </LenisProvider>
         
         {/* Structured data for organization */}
