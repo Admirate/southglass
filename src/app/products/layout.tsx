@@ -1,5 +1,4 @@
 import { Metadata, Viewport } from 'next';
-import { LenisProvider } from "@/app/providers/LenisProvider";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -36,5 +35,5 @@ export default function ProductsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <LenisProvider>{children}</LenisProvider>;
+  return <{children};
 } 
