@@ -6,66 +6,52 @@ export function useParallax(selector = "[data-parallax]") {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Respect reduced motion (accessibility)
+    // Accessibility: reduced motion
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (prefersReducedMotion) return;
 
-    let rafId: number | null = null;
     let elements: HTMLElement[] = [];
-    let scrollHandlerAttached = false;
+    let initialized = false;
 
+    // Collect elements lazily (production-safe)
     const collectElements = () => {
-      elements = Array.from(
-        document.querySelectorAll<HTMLElement>(selector)
-      );
+      elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
       return elements.length > 0;
     };
 
-    const onScroll = () => {
-      const scrollY = window.scrollY;
+    const applyParallax = (scrollY: number) => {
+      if (!initialized) {
+        if (!collectElements()) return;
+        initialized = true;
+      }
 
       elements.forEach((el) => {
-        const speed = Number(el.dataset.parallaxSpeed);
-
-        if (Number.isNaN(speed)) return;
-
+        const speed = Number(el.dataset.parallaxSpeed ?? 0.15);
         el.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
       });
     };
 
-    const init = () => {
-      if (!collectElements()) {
-        rafId = requestAnimationFrame(init);
-        return;
-      }
+    // HYBRID SCROLL SOURCE
+    const onScroll = () => {
+      const scrollY = (window as any).__lenis?.scroll ?? window.scrollY;
 
-      onScroll();
-
-      if (!scrollHandlerAttached) {
-        window.addEventListener("scroll", onScroll, { passive: true });
-        window.addEventListener("resize", collectElements);
-        scrollHandlerAttached = true;
-      }
+      applyParallax(scrollY);
     };
 
-    rafId = requestAnimationFrame(init);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // initial run
 
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-
-      if (scrollHandlerAttached) {
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", collectElements);
-      }
-
+      window.removeEventListener("scroll", onScroll);
       elements.forEach((el) => {
         el.style.transform = "";
       });
-
       elements = [];
     };
   }, [selector]);
 }
+
+
