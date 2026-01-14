@@ -35,5 +35,5 @@ export default function ProductsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <{children};
+  return {children};
 } 
