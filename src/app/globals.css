@@ -24,16 +24,6 @@
     }
   }
 
-    html,
-body {
-  height: 100%;
-}
-
-body {
-  overflow: hidden;
-}
-
-
   /* Better tap target size for mobile */
   button {
     @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
