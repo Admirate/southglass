@@ -14,19 +14,41 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    const lenis = new Lenis(lenisConfig);
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) return;
+
+    const scrollContainer = document.querySelector(
+      "#main-content"
+    ) as HTMLElement | null;
+
+    if (!scrollContainer) return;
+
+    const lenis = new Lenis({
+      ...lenisConfig,
+      wrapper: scrollContainer,
+      content: scrollContainer,
+    });
+
     lenisRef.current = lenis;
     window.__lenis = lenis;
 
+    let rafId: number;
+
     const raf = (time: number) => {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     };
-    requestAnimationFrame(raf);
 
-    console.log("LENIS MOUNTED (PROD SAFE)");
+    rafId = requestAnimationFrame(raf);
+
+    console.log("LENIS ACTIVE");
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       delete window.__lenis;
     };
