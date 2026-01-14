@@ -1,5 +1,7 @@
 "use client";
 
+console.log("🔥 LenisProvider FILE LOADED");
+
 import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import { lenisConfig } from "@/config/lenis.config";
@@ -15,6 +17,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
+    console.log("🔥 LenisProvider USEEFFECT RUN");
     if (lenisRef.current) return;
 
     const lenis = new Lenis(lenisConfig); 
