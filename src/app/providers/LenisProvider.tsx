@@ -6,51 +6,35 @@ import { lenisConfig } from "@/config/lenis.config";
 
 declare global {
   interface Window {
-    __lenis?: Lenis;
+    lenis?: Lenis;
   }
 }
 
 export function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    if (lenisRef.current) return;
 
-    if (prefersReducedMotion) return;
-
-    const scrollContainer = document.querySelector(
-      "#main-content"
-    ) as HTMLElement | null;
-
-    if (!scrollContainer) return;
-
-    const lenis = new Lenis({
-      ...lenisConfig,
-      wrapper: scrollContainer,
-      content: scrollContainer,
-    });
-
+    const lenis = new Lenis(lenisConfig);
     lenisRef.current = lenis;
-    window.__lenis = lenis;
 
-    let rafId: number;
+    // expose globally
+    window.lenis = lenis;
 
     const raf = (time: number) => {
       lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
+      rafId.current = requestAnimationFrame(raf);
     };
 
-    rafId = requestAnimationFrame(raf);
-
-    console.log("LENIS ACTIVE");
+    rafId.current = requestAnimationFrame(raf);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
       lenis.destroy();
-      delete window.__lenis;
+      lenisRef.current = null;
+      delete window.lenis;
     };
   }, []);
 
