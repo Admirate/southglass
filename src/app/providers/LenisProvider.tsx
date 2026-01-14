@@ -17,12 +17,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (lenisRef.current) return;
 
-    const lenis = new Lenis({
-      ...lenisConfig,
-      wrapper: document.documentElement,
-      content: document.body,
-    });
-
+    const lenis = new Lenis(lenisConfig); 
     lenisRef.current = lenis;
     window.lenis = lenis;
 
