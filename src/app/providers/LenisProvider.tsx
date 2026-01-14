@@ -15,7 +15,8 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    console.log("🔥 LenisProvider USEEFFECT RUN");
+    document.documentElement.setAttribute("data-lenis", "active");
+
     if (lenisRef.current) return;
 
     const lenis = new Lenis(lenisConfig); 
