@@ -40,5 +40,6 @@ export default function AboutLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return {children};
+  return <>{children}</>;
+
 } 
