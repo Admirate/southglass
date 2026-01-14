@@ -1,7 +1,5 @@
 "use client";
 
-console.log("🔥 LenisProvider FILE LOADED");
-
 import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import { lenisConfig } from "@/config/lenis.config";
