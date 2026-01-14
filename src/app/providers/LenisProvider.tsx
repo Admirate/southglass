@@ -12,26 +12,22 @@ declare global {
 
 export function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
-  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     if (lenisRef.current) return;
 
     const lenis = new Lenis(lenisConfig);
     lenisRef.current = lenis;
-
-    // expose globally
     window.lenis = lenis;
 
-    const raf = (time: number) => {
+    function raf(time: number) {
       lenis.raf(time);
-      rafId.current = requestAnimationFrame(raf);
-    };
+      requestAnimationFrame(raf);
+    }
 
-    rafId.current = requestAnimationFrame(raf);
+    requestAnimationFrame(raf);
 
     return () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
       lenis.destroy();
       lenisRef.current = null;
       delete window.lenis;
