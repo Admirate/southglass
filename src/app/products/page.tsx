@@ -17,10 +17,12 @@ import ProductSkeleton from "@/components/products/ProductSkeleton";
 import StaggeredReveal from "@/components/staggered-reveal";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { Product } from "@/types/products";
+import { useParallax } from "@/hooks/useParallax";
 
 const PRODUCTS_PER_PAGE = 9;
 
 export default function ProductsPage() {
+  useParallax();
   const [filters, setFilters] = useState({
     category: "",
     type: "",
@@ -151,7 +153,11 @@ export default function ProductsPage() {
 
       {/* Hero Section */}
       <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center overflow-hidden pt-20">
-        <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 z-0 opacity-75 will-change-transform"
+          data-parallax
+          data-parallax-speed="0.25"
+        >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/70 to-black" />
           <Image
             src="/optimized/glass-hero-bg.webp"

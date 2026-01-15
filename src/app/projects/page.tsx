@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Suspense } from "react";
 import ProjectList from "@/components/projects/ProjectList";
@@ -7,8 +7,11 @@ import Footer from "@/components/footer";
 import BackToTop from "@/components/BackToTop";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useParallax } from "@/hooks/useParallax";
 
 function ProjectsContent() {
+  useParallax();
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header with navigation */}
@@ -16,7 +19,11 @@ function ProjectsContent() {
 
       {/* Hero Section with Background Image */}
       <div className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center overflow-hidden pt-20">
-        <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 z-0 opacity-75 will-change-transform"
+          data-parallax
+          data-parallax-speed="0.25"
+        >
           {/* Background image */}
           <Image
             src="/projects/projects-hero.jpg"
@@ -41,26 +48,29 @@ function ProjectsContent() {
               </h1>
             </div>
             <p className="text-base sm:text-lg md:text-xl text-gray-300">
-              Explore our showcase of successful glass solutions across various industries and applications.
+              Explore our showcase of successful glass solutions across various
+              industries and applications.
             </p>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl sm:text-3xl font-bold mb-8">Browse Our Projects</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-8">
+            Browse Our Projects
+          </h2>
           <ProjectList category="all" searchQuery="" />
         </motion.div>
       </div>
 
       {/* Footer */}
       <Footer />
-      
+
       {/* Back to Top Button */}
       <BackToTop />
     </div>
@@ -69,12 +79,14 @@ function ProjectsContent() {
 
 export default function ProjectsPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500" />
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black text-white flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500" />
+        </div>
+      }
+    >
       <ProjectsContent />
     </Suspense>
   );
-} 
+}
